@@ -1,0 +1,89 @@
+<div fxLayout="row" fxLayoutAlign="stretch">
+  <mat-toolbar class="example-toolbar" fxFlex="100%;" fxFlex.xs="100%" fxFlex.sm="100%" fxFlex.md="100%">
+    <mat-toolbar-row>
+      <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()" matTooltip="Menu">
+        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+      </button>
+      <span><img src="./assets/images/google-keep.jpg" style="width:100px;"></span>
+      &nbsp;&nbsp;
+      <span>
+        <font size="5" face="arial">FundooNote</font>
+      </span>
+      <!-- <div fxLayout="column" fxLayoutAlign="center"> -->
+      <!-- <form class="center">
+          <mat-icon>search</mat-icon>
+          <input matInput placeholder="search" type="search" />
+        </form> -->
+      <!-- <mat-form-field id="search" class="center" appearance="outline">
+            <input matInput type="search" placeholder="Search">
+            <button mat-button class="close"  mat-icon-button >X</button>
+          </mat-form-field> -->
+      <div class="slinput" ng-init="">
+        <i class="fa fa-search left-icon"></i>
+        <input matInput type="search" placeholder="Search here" ng-model="searchInputVal" />
+        <i ng-class="{'fa' : true, 'fa-close' : true, 'right-icon' : true, active : (searchInputVal.length > 0)}"
+          ng-click="searchInputVal = ''"></i>
+      </div>
+      <!-- </div> -->
+      <a mat-button routerLink="/home" mat-icon-button routerLinkActive="active" matTooltip="Refresh" class="end">
+        <mat-icon>refresh</mat-icon>
+      </a>
+      <button mat-button [matMenuTriggerFor]="settings" mat-icon-button matTooltip="Settings" class="end">
+        <mat-icon>settings</mat-icon>
+      </button>
+      <mat-menu #settings="matMenu">
+        <button mat-menu-item>
+          <span>Settings</span>
+        </button>
+      </mat-menu>
+      <button mat-button [matMenuTriggerFor]="user" class="end">
+        <mat-icon>account_circle</mat-icon>
+      </button>
+      <mat-menu #user="matMenu">
+        <button mat-menu-item>
+          <mat-icon>logout</mat-icon>
+          <a mat-button routerLink="/login">
+            <span>Logout</span>
+          </a>
+        </button>
+      </mat-menu>
+    </mat-toolbar-row>
+  </mat-toolbar>
+</div>
+<mat-divider></mat-divider>
+<mat-sidenav-container class="example-container">
+  <mat-sidenav #drawer mode="side" opened role="navigation">
+    <mat-nav-list>
+      <button mat-menu-item>
+        <mat-icon>notes</mat-icon>
+        <span>Notes</span>
+      </button>
+      <button mat-menu-item>
+        <mat-icon>notifications</mat-icon>
+        <span>Remainder</span>
+      </button>
+      <mat-divider></mat-divider><br>
+      <span>
+        <font size="1" face="arial" text-align="center">LABELS</font>
+      </span>
+      <button mat-menu-item>
+        <mat-icon>edit</mat-icon>
+        <span>Edit Labels</span>
+      </button>
+      <mat-divider></mat-divider>
+      <button mat-menu-item>
+        <mat-icon>archive</mat-icon>
+        <span>Archive</span>
+      </button>
+      <button mat-menu-item>
+        <mat-icon>delete</mat-icon>
+        <span>Bin</span>
+      </button>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <main>
+      <router-outlet></router-outlet>
+    </main>
+  </mat-sidenav-content>
+</mat-sidenav-container>
