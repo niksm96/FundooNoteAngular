@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule, MatFormFieldModule, MatRippleModule, MatSelectModule,
   MatInputModule, MatCardModule, MatMenuModule, MatToolbarModule, MatSidenavModule, 
-  MatDividerModule, MatListModule, MatExpansionModule} from '@angular/material';
+  MatDividerModule, MatListModule, MatExpansionModule, MatSnackBarModule} from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import {MatIconModule} from '@angular/material/icon'; 
 import { HttpClientModule } from '@angular/common/http';
@@ -28,7 +28,8 @@ import { HttpClientModule } from '@angular/common/http';
     MatSidenavModule,
     MatDividerModule,
     MatListModule,
-    MatExpansionModule
+    MatExpansionModule,
+    MatSnackBarModule
   ],
   exports: [
     FormsModule,
@@ -46,7 +47,8 @@ import { HttpClientModule } from '@angular/common/http';
     MatSidenavModule,
     MatDividerModule,
     MatListModule,
-    MatExpansionModule
+    MatExpansionModule,
+    MatSnackBarModule
   ]
 })
 export class AppMaterialModule { }

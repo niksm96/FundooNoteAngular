@@ -9,6 +9,8 @@ import { RegisterComponent } from './register/register.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HomeComponent } from './home/home.component';
 import { HomenotebodyComponent } from './homenotebody/homenotebody.component';
+import { ForgotpasswordComponent } from './forgotpassword/forgotpassword.component';
+import { ResetpasswordComponent } from './resetpassword/resetpassword.component';
 
 @NgModule({
   declarations: [
@@ -17,6 +19,8 @@ import { HomenotebodyComponent } from './homenotebody/homenotebody.component';
     RegisterComponent,
     HomeComponent,
     HomenotebodyComponent,
+    ForgotpasswordComponent,
+    ResetpasswordComponent,
   ],
   imports: [
     BrowserModule,

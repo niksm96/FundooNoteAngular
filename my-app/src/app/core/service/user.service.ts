@@ -12,26 +12,18 @@ export class UserService {
     private router: Router, ) { }
 
   login(user) {
-    this.httpUtil.postService(environment.base_url + 'login', user).subscribe(response => {
-      if (response.status == 200) {
-        console.log("You have logged in successfully");
-        localStorage.setItem("token",response.headers.get('token'));
-        this.router.navigate(['home']);
-      }
-      else {
-        console.log("Failed to logged in");
-      }
-    });
+    return this.httpUtil.postService(environment.base_url + 'login', user);
   }
 
   register(user) {
-    this.httpUtil.postService(environment.base_url + 'registeruser', user).subscribe(response => {
-      if (response.status == 200) {
-        console.log("Successfully register");
-      }
-      else {
-        console.log("Registration failed due to some reasons");
-      }
-    })
+    return this.httpUtil.postService(environment.base_url + 'registeruser', user);
+  }
+
+  forgotPassword(user){
+    return this.httpUtil.postService(environment.base_url+'forgotpassword',user);
+  }
+
+  resetPassword(user,id){
+    return this.httpUtil.putService(environment.base_url+'resetpassword/'+id,user,id);
   }
 }

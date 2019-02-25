@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from '../core/service/user.service';
+import { MatSnackBar } from '@angular/material';
 
 @Component({
   selector: 'app-login',
@@ -17,7 +18,8 @@ export class LoginComponent implements OnInit {
   hide = true;
 
   constructor(private formBuilder: FormBuilder, private route: ActivatedRoute,
-    private router: Router, private userService: UserService) {
+    private router: Router, private userService: UserService,
+    private snackBar: MatSnackBar) {
 
   }
 
@@ -34,9 +36,24 @@ export class LoginComponent implements OnInit {
     this.submitted = true;
 
     if (this.loginForm.invalid) {
+      this.snackBar.open("Both fields are required", "OK", {
+        duration: 3000,
+      });
       return;
     }
     console.log(user);
-    this.userService.login(user);
+    this.userService.login(user).subscribe(response => {
+      console.log("You have logged in successfully");
+      this.snackBar.open("Successfully logged in", "OK", {
+        duration: 3000,
+      });
+      this.router.navigate(['home']);
+
+    }, (error) => {
+      console.log("Couldn't log in ");
+      this.snackBar.open("Email-Id or Password is invalid", "OK", {
+        duration: 3000,
+      });
+    });
   }
 }
