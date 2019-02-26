@@ -11,6 +11,7 @@ import { HomeComponent } from './home/home.component';
 import { HomenotebodyComponent } from './homenotebody/homenotebody.component';
 import { ForgotpasswordComponent } from './forgotpassword/forgotpassword.component';
 import { ResetpasswordComponent } from './resetpassword/resetpassword.component';
+import { CalenderviewComponent } from './calenderview/calenderview.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { ResetpasswordComponent } from './resetpassword/resetpassword.component'
     HomenotebodyComponent,
     ForgotpasswordComponent,
     ResetpasswordComponent,
+    CalenderviewComponent,
   ],
   imports: [
     BrowserModule,

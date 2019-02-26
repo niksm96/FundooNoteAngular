@@ -1,24 +1,48 @@
 <div fxLayout="row" fxLayoutAlign="space-evenly center" style="width:500px" fxFlex="60">
-  <mat-accordion>
-    <mat-expansion-panel>
-      <mat-expansion-panel-header>
-        <mat-panel-title>
-          <mat-form-field>
-            <input matInput placeholder="Take a note..">
-          </mat-form-field>
-          <div class="end">
-            <button mat-icon-button style="float: right;">
-              <mat-icon>image</mat-icon>
-            </button>
-            <button mat-icon-button style="float: right;">
-              <mat-icon>check_box_outline</mat-icon>
-            </button>
-          </div>
-        </mat-panel-title>
-      </mat-expansion-panel-header>
-      <mat-form-field>
-        <input matInput placeholder="Title">
-      </mat-form-field>
-    </mat-expansion-panel>
-  </mat-accordion>
+  <mat-toolbar>
+    <mat-accordion fxFlex="80%;" fxFlex.xs="100%" fxFlex.sm="10%" fxFlex.md="100%">
+      <mat-expansion-panel (opened)="showHeader = false" (closed)="showHeader = true" style="width: 600px">
+        <mat-expansion-panel-header>
+          <ng-container *ngIf="showHeader;else tempTtext">
+            <mat-panel-title>
+              <h5>Take a note..</h5>
+
+              <div style="text-align:right; width:100%;">
+                <button mat-icon-button matTooltip="new list">
+                  <mat-icon>check_box</mat-icon>
+                </button>
+                <button mat-icon-button matTooltip="new note with image">
+                  <mat-icon>image</mat-icon>
+                </button>
+              </div>
+            </mat-panel-title>
+          </ng-container>
+          <ng-template #tempTtext>
+          </ng-template>
+        </mat-expansion-panel-header>
+        <mat-panel-description>
+          <input class="noBorderAndBackground" placeholder="Title" style="width: 500px;">&nbsp;
+          <!-- <button mat-icon-button matTooltip="pin">
+            <mat-icon>colorize</mat-icon>
+          </button> -->
+        </mat-panel-description>
+        <mat-panel-description>
+          <input class="noBorderAndBackground" placeholder="Take a note.." style="width:500px; ">
+        </mat-panel-description>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </mat-toolbar>
+</div>
+
+<div fxLayout="row" fxFlex.md="70" fxLayoutWrap class="card-deck-container mat-elevation-z4">
+  <div fxFlex *ngFor="let notes of notes" class="card-item">
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>{{notes.title}}</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        {{notes.description}}
+      </mat-card-content>
+    </mat-card>
+  </div>
 </div>
