@@ -10,17 +10,31 @@ import { Observable } from 'rxjs';
 })
 export class NoteService {
 
+  token = localStorage.getItem('token');
+  httpheaders = {
+    headers:new HttpHeaders({
+      'Content-Type': 'application/json',
+      'token': this.token
+    })
+  };
+ 
+
   constructor(private httpUtil: HttputilService,
     private route: ActivatedRoute) { }
 
   retrieveNote():Observable<any> {
-    var token= localStorage.getItem('token');
-    var httpheaders = {
-      headers:new HttpHeaders({
-        'Content-Type': 'application/x-www-form-urlencoded',
-        'token': token
-      })
-    };
-    return this.httpUtil.getService(environment.note_url+'retrievenote',httpheaders);
+    return this.httpUtil.getService(environment.note_url+'retrievenote',this.httpheaders);
+  }
+
+  createNote(note):Observable<any>{
+    return this.httpUtil.postServiceWithHeader(environment.note_url+'createnote',note,this.httpheaders);
+  }
+
+  deleteNote(note):Observable<any>{
+    return this.httpUtil.postServiceWithHeader(environment.note_url+'deletenote',note,this.httpheaders);
+  }
+
+  updateNote(note):Observable<any>{
+    return this.httpUtil.putService(environment.note_url+'updatenote',note,this.httpheaders);
   }
 }

@@ -1,0 +1,8 @@
+<div class="notecard">
+    <div mat-dialog-title contenteditable="true" id="title" class="textarea" [innerHTML]=data.title>{{data.title}}</div>
+    <p mat-dialog-content contenteditable="true" id="description" class="textarea" [innerHTML]=data.description>{{data.description}}</p>
+    <div>
+      <button mat-button (click)="closeClick(data);" style="float:right">Close</button>
+    </div>
+  </div>
+  

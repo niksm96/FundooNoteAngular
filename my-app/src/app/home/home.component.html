@@ -70,7 +70,7 @@
         <mat-icon>edit</mat-icon>
         <span>Edit Labels</span>
       </button>
-      <mat-divider></mat-divider>
+      <br><mat-divider></mat-divider><br>
       <button mat-menu-item>
         <mat-icon>archive</mat-icon>
         <span>Archive</span>
@@ -78,6 +78,11 @@
       <button mat-menu-item>
         <mat-icon>delete</mat-icon>
         <span>Bin</span>
+      </button>
+      <br><mat-divider></mat-divider><br>
+      <button mat-menu-item (click)="onClick()"> 
+        <mat-icon>calendar_today</mat-icon>
+        <span>Calendar</span>
       </button>
     </mat-nav-list>
   </mat-sidenav>

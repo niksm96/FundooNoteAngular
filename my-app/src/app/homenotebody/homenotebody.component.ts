@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { NoteService } from '../core/service/note.service';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Note } from '../core/models/Note';
+import { NoteService } from '../core/service/note.service';
+import { MatSnackBar } from '@angular/material';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-homenotebody',
@@ -8,16 +11,41 @@ import { Note } from '../core/models/Note';
   styleUrls: ['./homenotebody.component.css']
 })
 export class HomenotebodyComponent implements OnInit {
-  
-   notes:Note[] = [];
-  
-  constructor(private noteService:NoteService) { }
+
+  createNoteForm: FormGroup
+  notes: Note[] = [];
+
+  constructor(private noteService: NoteService,
+    private snackBar: MatSnackBar, private formBuilder: FormBuilder, private route: ActivatedRoute,
+    private router: Router, ) { }
 
   ngOnInit() {
-    this.noteService.retrieveNote().subscribe(notes => { 
+    this.createNoteForm = this.formBuilder.group({
+      title: [''],
+      description: ['', Validators.required]
+    });
+    this.noteService.retrieveNote().subscribe(notes => {
       this.notes = notes;
       console.log(this.notes);
-  });
+    });
   }
 
+  onSubmit(note) {
+    if (this.createNoteForm.invalid) {
+      this.snackBar.open("Empty note annot be created", "OK", {
+        duration: 3000,
+      });
+      return;
+    }
+    this.noteService.createNote(note).subscribe(response => {
+      this.snackBar.open("Note created successfully", "OK", {
+        duration: 3000,
+      });
+    },
+      (error) => {
+        this.snackBar.open("Note creation failed", "OK", {
+          duration: 3000,
+        });
+      });
+  }
 }

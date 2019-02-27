@@ -1,19 +1,20 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatButtonModule, MatFormFieldModule, MatRippleModule, MatSelectModule,
-  MatInputModule, MatCardModule, MatMenuModule, MatToolbarModule, MatSidenavModule, 
-  MatDividerModule, MatListModule, MatExpansionModule, MatSnackBarModule} from '@angular/material';
+import {
+  MatButtonModule, MatFormFieldModule, MatRippleModule, MatSelectModule,
+  MatInputModule, MatCardModule, MatMenuModule, MatToolbarModule, MatSidenavModule,
+  MatDividerModule, MatListModule, MatExpansionModule, MatSnackBarModule, MatDialogModule
+} from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import {MatIconModule} from '@angular/material/icon'; 
+import { MatIconModule } from '@angular/material/icon';
 import { HttpClientModule } from '@angular/common/http';
-// import { FlatpickrModule } from 'angular-flatpickr';
-// import { CalendarModule, DateAdapter } from 'angular-calendar';
-// import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
+import { CalendarModule, DateAdapter } from 'angular-calendar';
+import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 
 
 @NgModule({
-  declarations: [ ],
+  declarations: [],
   imports: [
     CommonModule,
     FormsModule,
@@ -32,7 +33,8 @@ import { HttpClientModule } from '@angular/common/http';
     MatDividerModule,
     MatListModule,
     MatExpansionModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatDialogModule
   ],
   exports: [
     FormsModule,
@@ -51,7 +53,8 @@ import { HttpClientModule } from '@angular/common/http';
     MatDividerModule,
     MatListModule,
     MatExpansionModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatDialogModule
   ]
 })
 export class AppMaterialModule { }

@@ -24,11 +24,7 @@ export class HttputilService {
     return this.http.delete<any>(url,header);
   }
 
-  postServiceWithParam(url,params){
-    return this.http.post<any>(url,params);
-  }
-
-  deleteServiceWithParams(url,params){
-    return this.http.delete(url,params);
+  postServiceWithHeader(url,object,header){
+    return this.http.post<any>(url,object,header);
   }
 }
