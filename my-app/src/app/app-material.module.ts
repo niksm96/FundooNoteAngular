@@ -4,13 +4,11 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {
   MatButtonModule, MatFormFieldModule, MatRippleModule, MatSelectModule,
   MatInputModule, MatCardModule, MatMenuModule, MatToolbarModule, MatSidenavModule,
-  MatDividerModule, MatListModule, MatExpansionModule, MatSnackBarModule, MatDialogModule
+  MatDividerModule, MatListModule, MatExpansionModule, MatSnackBarModule, MatDatepickerModule, MAT_NATIVE_DATE_FORMATS, MAT_DATE_FORMATS, NativeDateModule, MatDialogModule
 } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatIconModule } from '@angular/material/icon';
 import { HttpClientModule } from '@angular/common/http';
-import { CalendarModule, DateAdapter } from 'angular-calendar';
-import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 
 
 @NgModule({
@@ -34,6 +32,8 @@ import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
     MatListModule,
     MatExpansionModule,
     MatSnackBarModule,
+    MatDatepickerModule,
+    NativeDateModule,
     MatDialogModule
   ],
   exports: [
@@ -54,7 +54,12 @@ import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
     MatListModule,
     MatExpansionModule,
     MatSnackBarModule,
+    MatDatepickerModule,
+    NativeDateModule,
     MatDialogModule
+  ],
+   providers: [
+    {provide: MAT_DATE_FORMATS, useValue:MAT_NATIVE_DATE_FORMATS},
   ]
 })
 export class AppMaterialModule { }

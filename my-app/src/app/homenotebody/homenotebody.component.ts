@@ -13,7 +13,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 export class HomenotebodyComponent implements OnInit {
 
   createNoteForm: FormGroup
-  notes: Note[] = [];
+  
 
   constructor(private noteService: NoteService,
     private snackBar: MatSnackBar, private formBuilder: FormBuilder, private route: ActivatedRoute,
@@ -24,15 +24,12 @@ export class HomenotebodyComponent implements OnInit {
       title: [''],
       description: ['', Validators.required]
     });
-    this.noteService.retrieveNote().subscribe(notes => {
-      this.notes = notes;
-      console.log(this.notes);
-    });
+   
   }
 
   onSubmit(note) {
     if (this.createNoteForm.invalid) {
-      this.snackBar.open("Empty note annot be created", "OK", {
+      this.snackBar.open("Empty note cannot be created", "OK", {
         duration: 3000,
       });
       return;

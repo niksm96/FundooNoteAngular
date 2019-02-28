@@ -30,11 +30,16 @@ export class NoteService {
     return this.httpUtil.postServiceWithHeader(environment.note_url+'createnote',note,this.httpheaders);
   }
 
-  deleteNote(note):Observable<any>{
-    return this.httpUtil.postServiceWithHeader(environment.note_url+'deletenote',note,this.httpheaders);
+  deleteNote(noteId):Observable<any>{
+    return this.httpUtil.deleteService(environment.note_url+'deletenote/'+noteId,this.httpheaders);
   }
 
   updateNote(note):Observable<any>{
-    return this.httpUtil.putService(environment.note_url+'updatenote',note,this.httpheaders);
+    return this.httpUtil.putService(environment.note_url+'updatenote/'+note.noteId,note,this.httpheaders);
   }
+
+  retrieveArchiveNote():Observable<any>{
+    return this.httpUtil.getService(environment.note_url+'retrievearchivenote',this.httpheaders);
+  }
+
 }

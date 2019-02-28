@@ -11,13 +11,13 @@ import { HomeComponent } from './home/home.component';
 import { HomenotebodyComponent } from './homenotebody/homenotebody.component';
 import { ForgotpasswordComponent } from './forgotpassword/forgotpassword.component';
 import { ResetpasswordComponent } from './resetpassword/resetpassword.component';
-import { CalenderviewComponent } from './calenderview/calenderview.component';
 import { NotecomponentComponent } from './notecomponent/notecomponent.component';
 import { UpdatenoteComponent } from './updatenote/updatenote.component';
 import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { FlatpickrModule } from 'angularx-flatpickr';
 import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
+import { ArchivenoteComponent } from './archivenote/archivenote.component';
 
 @NgModule({
   declarations: [
@@ -28,9 +28,9 @@ import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
     HomenotebodyComponent,
     ForgotpasswordComponent,
     ResetpasswordComponent,
-    CalenderviewComponent,
     NotecomponentComponent,
     UpdatenoteComponent,
+    ArchivenoteComponent,
   ],
   imports: [
     BrowserModule,

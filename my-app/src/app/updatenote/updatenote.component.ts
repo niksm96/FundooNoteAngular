@@ -1,6 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA, MatSnackBar } from '@angular/material';
 import { NoteService } from '../core/service/note.service';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-updatenote',
@@ -16,11 +17,13 @@ export class UpdatenoteComponent implements OnInit {
 
   ngOnInit() {
   }
+
   closeClick(note){
     this.noteService.updateNote(note).subscribe(response =>{
       this.snackBar.open("Note updated successfully", "OK", {
         duration: 3000,
       });
     })
+    this.dialogRef.close();
   }
 }

@@ -1,27 +1,30 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Note } from '../core/models/Note';
 import { NoteService } from '../core/service/note.service';
 import { MatSnackBar, MatDialog } from '@angular/material';
+import { FormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UpdatenoteComponent } from '../updatenote/updatenote.component';
+import { Note } from '../core/models/Note';
 
 @Component({
-  selector: 'app-notecomponent',
-  templateUrl: './notecomponent.component.html',
-  styleUrls: ['./notecomponent.component.css']
+  selector: 'app-archivenote',
+  templateUrl: './archivenote.component.html',
+  styleUrls: ['./archivenote.component.css']
 })
-export class NotecomponentComponent implements OnInit {
-
+export class ArchivenoteComponent implements OnInit {
+  
   notes: Note[] = [];
 
-  constructor(private noteService: NoteService,
-    private snackBar: MatSnackBar, private formBuilder: FormBuilder, private route: ActivatedRoute,
+  constructor(
+    private noteService: NoteService,
+    private snackBar: MatSnackBar, 
+    private formBuilder: FormBuilder,
+    private route: ActivatedRoute,
     private router: Router,
     private dialog: MatDialog) { }
 
   ngOnInit() {
-    this.noteService.retrieveNote().subscribe(notes => {
+    this.noteService.retrieveArchiveNote().subscribe(notes => {
       this.notes = notes;
       console.log(this.notes);
     });
@@ -50,5 +53,4 @@ export class NotecomponentComponent implements OnInit {
       console.log('Dailog result ${result}');
     });
   }
-
 }

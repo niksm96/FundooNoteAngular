@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CalenderviewComponent } from './calenderview.component';
+import { ArchivenoteComponent } from './archivenote.component';
 
-describe('CalenderviewComponent', () => {
-  let component: CalenderviewComponent;
-  let fixture: ComponentFixture<CalenderviewComponent>;
+describe('ArchivenoteComponent', () => {
+  let component: ArchivenoteComponent;
+  let fixture: ComponentFixture<ArchivenoteComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CalenderviewComponent ]
+      declarations: [ ArchivenoteComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(CalenderviewComponent);
+    fixture = TestBed.createComponent(ArchivenoteComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
