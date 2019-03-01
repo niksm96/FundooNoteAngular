@@ -67,9 +67,9 @@
         <mat-icon>archive</mat-icon>
         <span>Archive</span>
       </button>
-      <button mat-menu-item>
+      <button mat-menu-item (click)="fetchDeletedNote()">
         <mat-icon>delete</mat-icon>
-        <span>Bin</span>
+        <span>Trash</span>
       </button>
       <br>
       <mat-divider></mat-divider><br>

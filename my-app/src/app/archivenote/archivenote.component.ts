@@ -24,18 +24,10 @@ export class ArchivenoteComponent implements OnInit {
     private dialog: MatDialog) { }
 
   ngOnInit() {
-    this.noteService.retrieveArchiveNote().subscribe(notes => {
+    this.noteService.retrieveNote().subscribe(notes => {
       this.notes = notes;
       console.log(this.notes);
     });
-  }
-
-  onDelete(note) {
-    this.noteService.deleteNote(note.noteId).subscribe(response => {
-      this.snackBar.open("Note deleted successfully", "OK", {
-        duration: 3000,
-      });
-    })
   }
 
   openDialog(note): void {
@@ -52,5 +44,28 @@ export class ArchivenoteComponent implements OnInit {
       })
       console.log('Dailog result ${result}');
     });
+  }
+
+  moveToTrash(note) {
+    var newNote = {
+      "archive": note.archive,
+      "description": note.description,
+      "title": note.title,
+      "trashed": true,
+      "noteId": note.noteId,
+      "pinned": note.pinned
+    }
+    this.noteService.updateNote(newNote).subscribe(response => {
+      console.log("Trash become true");
+      this.snackBar.open("Note trashed", "OK", {
+        duration: 3000,
+      });
+    },
+      (error) => {
+        console.log(error);
+        this.snackBar.open("Note trashed failed", "OK", {
+          duration: 3000,
+        });
+      })
   }
 }

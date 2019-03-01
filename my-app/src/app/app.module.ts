@@ -18,6 +18,8 @@ import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { FlatpickrModule } from 'angularx-flatpickr';
 import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
 import { ArchivenoteComponent } from './archivenote/archivenote.component';
+import { TrashnoteComponent } from './trashnote/trashnote.component';
+import { TrashdialogComponent } from './trashdialog/trashdialog.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +33,8 @@ import { ArchivenoteComponent } from './archivenote/archivenote.component';
     NotecomponentComponent,
     UpdatenoteComponent,
     ArchivenoteComponent,
+    TrashnoteComponent,
+    TrashdialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -44,7 +48,10 @@ import { ArchivenoteComponent } from './archivenote/archivenote.component';
       useFactory: adapterFactory
     })
   ],
-  entryComponents: [UpdatenoteComponent],
+  entryComponents: [
+    UpdatenoteComponent , 
+    TrashdialogComponent   
+  ],
   providers: [],
   bootstrap: [AppComponent]
 })

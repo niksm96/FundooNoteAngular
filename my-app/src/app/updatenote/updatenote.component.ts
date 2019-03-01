@@ -26,4 +26,23 @@ export class UpdatenoteComponent implements OnInit {
     })
     this.dialogRef.close();
   }
+
+  updateArchiveNote(note){
+    var newNote = {
+      "archive":true,
+      "description":note.description,
+      "title":note.title,
+      "inTrash":note.inTrash,
+      "noteId":note.noteId,
+      "pinned":note.pinned
+    }
+    this.noteService.updateNote(newNote).subscribe(response =>{
+      this.snackBar.open("Note Archived Successfully", "OK", {
+        duration: 3000,
+      });
+    },
+    (error)=>{
+      console.log(error);
+    })
+  }
 }

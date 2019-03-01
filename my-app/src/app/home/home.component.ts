@@ -38,4 +38,8 @@ export class HomeComponent implements OnInit {
   fetchNote(){
     this.router.navigate(['home/homenotebody']);
   }
+
+  fetchDeletedNote(){
+    this.router.navigate(['home/trashnote']);
+  }
 }

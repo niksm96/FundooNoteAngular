@@ -38,8 +38,8 @@ export class NoteService {
     return this.httpUtil.putService(environment.note_url+'updatenote/'+note.noteId,note,this.httpheaders);
   }
 
-  retrieveArchiveNote():Observable<any>{
-    return this.httpUtil.getService(environment.note_url+'retrievearchivenote',this.httpheaders);
-  }
+  // retrieveArchiveNote():Observable<any>{
+  //   return this.httpUtil.getService(environment.note_url+'retrievearchivenote',this.httpheaders);
+  // }
 
 }

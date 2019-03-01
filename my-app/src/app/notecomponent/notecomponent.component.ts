@@ -27,28 +27,62 @@ export class NotecomponentComponent implements OnInit {
     });
   }
 
-  onDelete(note) {
-    this.noteService.deleteNote(note.noteId).subscribe(response => {
-      this.snackBar.open("Note deleted successfully", "OK", {
+  moveToTrash(note) {
+    var newNote = {
+      "archive": note.archive,
+      "description": note.description,
+      "title": note.title,
+      "trashed": true,
+      "noteId": note.noteId,
+      "pinned": note.pinned
+    }
+    this.noteService.updateNote(newNote).subscribe(response => {
+      console.log("Trash become true");
+      this.snackBar.open("Note trashed", "OK", {
         duration: 3000,
       });
-    })
+    },
+      (error) => {
+        console.log(error);
+        this.snackBar.open("Note trashed failed", "OK", {
+          duration: 3000,
+        });
+      })
   }
 
   openDialog(note): void {
     const dialogRef = this.dialog.open(UpdatenoteComponent, {
       width: '500px',
-      height:'200px',
+      height: '200px',
       data: note
     });
     dialogRef.afterClosed().subscribe(result => {
-      this.noteService.updateNote(note).subscribe(response =>{
+      this.noteService.updateNote(note).subscribe(response => {
         this.snackBar.open("Note updated successfully", "OK", {
           duration: 3000,
         });
       })
       console.log('Dailog result ${result}');
     });
+  }
+
+  updateArchiveNote(note) {
+    var newNote = {
+      "archive": true,
+      "description": note.description,
+      "title": note.title,
+      "trashed": note.trashed,
+      "noteId": note.noteId,
+      "pinned": note.pinned
+    }
+    this.noteService.updateNote(newNote).subscribe(response => {
+      this.snackBar.open("Note Archived Successfully", "OK", {
+        duration: 3000,
+      });
+    },
+      (error) => {
+        console.log(error);
+      })
   }
 
 }
