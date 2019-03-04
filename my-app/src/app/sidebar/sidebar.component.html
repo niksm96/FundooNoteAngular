@@ -1,0 +1,44 @@
+<mat-sidenav-container class="example-container">
+  <mat-sidenav #drawer mode="side" opened role="navigation">
+    <mat-nav-list>
+      <button mat-menu-item (click)="fetchNote()">
+        <mat-icon>notes</mat-icon>
+        <span>Notes</span>
+      </button>
+      <button mat-menu-item>
+        <mat-icon>notifications</mat-icon>
+        <span>Remainder</span>
+      </button>
+      <mat-divider></mat-divider><br>
+      <span>
+        <font size="1" face="arial" text-align="center">LABELS</font>
+      </span>
+      <button mat-menu-item>
+        <mat-icon>edit</mat-icon>
+        <span>Edit Labels</span>
+      </button>
+      <br>
+      <mat-divider></mat-divider><br>
+      <button mat-menu-item (click)="fetchArchiveNote()">
+        <mat-icon>archive</mat-icon>
+        <span>Archive</span>
+      </button>
+      <button mat-menu-item (click)="fetchDeletedNote()">
+        <mat-icon>delete</mat-icon>
+        <span>Trash</span>
+      </button>
+      <br>
+      <mat-divider></mat-divider><br>
+      <mat-form-field>
+        <input matInput [matDatepicker]="dp" placeholder="Date" [formControl]="date">
+        <mat-datepicker-toggle matSuffix [for]="dp"></mat-datepicker-toggle>
+        <mat-datepicker #dp></mat-datepicker>
+      </mat-form-field>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <main>
+      <router-outlet></router-outlet>
+    </main>
+  </mat-sidenav-content>
+</mat-sidenav-container>

@@ -19,8 +19,10 @@ export class NoteService {
   };
  
 
-  constructor(private httpUtil: HttputilService,
-    private route: ActivatedRoute) { }
+  constructor(
+    private httpUtil: HttputilService,
+    private route: ActivatedRoute
+    ) { }
 
   retrieveNote():Observable<any> {
     return this.httpUtil.getService(environment.note_url+'retrievenote',this.httpheaders);

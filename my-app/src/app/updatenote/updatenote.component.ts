@@ -1,7 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA, MatSnackBar } from '@angular/material';
 import { NoteService } from '../core/service/note.service';
-import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-updatenote',
@@ -29,12 +28,8 @@ export class UpdatenoteComponent implements OnInit {
 
   updateArchiveNote(note){
     var newNote = {
-      "archive":true,
-      "description":note.description,
-      "title":note.title,
-      "inTrash":note.inTrash,
-      "noteId":note.noteId,
-      "pinned":note.pinned
+      ...note,
+      archive :true
     }
     this.noteService.updateNote(newNote).subscribe(response =>{
       this.snackBar.open("Note Archived Successfully", "OK", {
@@ -43,6 +38,9 @@ export class UpdatenoteComponent implements OnInit {
     },
     (error)=>{
       console.log(error);
+      this.snackBar.open("Note couldn't archive", "OK", {
+        duration: 3000,
+      });
     })
   }
 }

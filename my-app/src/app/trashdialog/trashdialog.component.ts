@@ -1,6 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA, MatSnackBar } from '@angular/material';
 import { NoteService } from '../core/service/note.service';
+import { HelperServiceService } from '../core/service/helper-service.service';
 
 @Component({
   selector: 'app-trashdialog',
@@ -12,13 +13,12 @@ export class TrashdialogComponent implements OnInit {
   constructor(public dialogRef: MatDialogRef<TrashdialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data,
     private noteService: NoteService,
-    private snackBar: MatSnackBar) { }
+    private snackBar: MatSnackBar,
+    private helperService : HelperServiceService) { }
 
 
   ngOnInit() {
   }
-
-
 
   onDelete(note) {
     this.noteService.deleteNote(note.noteId).subscribe(response => {
@@ -36,14 +36,7 @@ export class TrashdialogComponent implements OnInit {
   }
 
   restore(note) {
-    var newNote = {
-      "archive": note.archive,
-      "description": note.description,
-      "title": note.title,
-      "trashed": false,
-      "noteId": note.noteId,
-      "pinned": note.pinned
-    }
+    var newNote = this.helperService.restoreService(note);
     this.noteService.updateNote(newNote).subscribe(response => {
       this.snackBar.open("Note Restored Successfully", "OK", {
         duration: 3000,

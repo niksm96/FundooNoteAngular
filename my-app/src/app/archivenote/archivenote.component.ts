@@ -5,6 +5,7 @@ import { FormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UpdatenoteComponent } from '../updatenote/updatenote.component';
 import { Note } from '../core/models/Note';
+import { HelperServiceService } from '../core/service/helper-service.service';
 
 @Component({
   selector: 'app-archivenote',
@@ -21,7 +22,9 @@ export class ArchivenoteComponent implements OnInit {
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
-    private dialog: MatDialog) { }
+    private dialog: MatDialog,
+    private helperService : HelperServiceService
+    ) { }
 
   ngOnInit() {
     this.noteService.retrieveNote().subscribe(notes => {
@@ -30,22 +33,10 @@ export class ArchivenoteComponent implements OnInit {
     });
   }
 
-  openDialog(note): void {
-    const dialogRef = this.dialog.open(UpdatenoteComponent, {
-      width: '500px',
-      height:'200px',
-      data: note
-    });
-    dialogRef.afterClosed().subscribe(result => {
-      this.noteService.updateNote(note).subscribe(response =>{
-        this.snackBar.open("Note updated successfully", "OK", {
-          duration: 3000,
-        });
-      })
-      console.log('Dailog result ${result}');
-    });
+  openDialog(note){
+    this.helperService.openDialogService(note);
   }
-
+  
   moveToTrash(note) {
     var newNote = {
       "archive": note.archive,

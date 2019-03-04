@@ -11,7 +11,6 @@ import { HomeComponent } from './home/home.component';
 import { HomenotebodyComponent } from './homenotebody/homenotebody.component';
 import { ForgotpasswordComponent } from './forgotpassword/forgotpassword.component';
 import { ResetpasswordComponent } from './resetpassword/resetpassword.component';
-import { NotecomponentComponent } from './notecomponent/notecomponent.component';
 import { UpdatenoteComponent } from './updatenote/updatenote.component';
 import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
@@ -20,6 +19,10 @@ import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
 import { ArchivenoteComponent } from './archivenote/archivenote.component';
 import { TrashnoteComponent } from './trashnote/trashnote.component';
 import { TrashdialogComponent } from './trashdialog/trashdialog.component';
+import { SidebarComponent } from './sidebar/sidebar.component';
+import { HeaderComponent } from './header/header.component';
+import { NoteComponent } from './note/note.component';
+import { ViewNotesComponent } from './view-notes/view-notes.component';
 
 @NgModule({
   declarations: [
@@ -30,11 +33,14 @@ import { TrashdialogComponent } from './trashdialog/trashdialog.component';
     HomenotebodyComponent,
     ForgotpasswordComponent,
     ResetpasswordComponent,
-    NotecomponentComponent,
     UpdatenoteComponent,
     ArchivenoteComponent,
     TrashnoteComponent,
     TrashdialogComponent,
+    SidebarComponent,
+    HeaderComponent,
+    NoteComponent,
+    ViewNotesComponent
   ],
   imports: [
     BrowserModule,

@@ -1,8 +1,12 @@
+<app-note></app-note>
 <div fxLayout="row" fxFlex.md="70">
   <div fxFlex *ngFor="let note of notes" class="card-item">
     <mat-card *ngIf="!note.archive && !note.trashed">
       <mat-card-header>
         <mat-card-title (click)=openDialog(note)>{{note.title}}</mat-card-title>
+        <button mat-icon-button matTooltip="Pin" class="end" (click)="pinnedNote()">
+          <mat-icon>colorize</mat-icon>
+        </button>
       </mat-card-header>
       <mat-card-content (click)=openDialog(note)>
         {{note.description}}

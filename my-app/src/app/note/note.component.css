@@ -1,0 +1,13 @@
+.mat-toolbar {
+  
+    padding: 100px;}
+  
+    .noBorderAndBackground{
+     
+     text-align: left;
+     height:50px;
+     font-size:14pt;
+     background-color:white;
+     border: hidden;
+     outline: none;
+    }
