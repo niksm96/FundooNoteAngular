@@ -20,8 +20,7 @@ export class NoteService {
  
 
   constructor(
-    private httpUtil: HttputilService,
-    private route: ActivatedRoute
+    private httpUtil: HttputilService
     ) { }
 
   retrieveNote():Observable<any> {

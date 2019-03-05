@@ -2,7 +2,10 @@ import { Component, OnInit, ViewChild, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
 import { FormControl } from '@angular/forms';
-import { MAT_DATE_FORMATS } from '@angular/material';
+import { MAT_DATE_FORMATS, MatDialog } from '@angular/material';
+import { EditlabelComponent } from '../editlabel/editlabel.component';
+import { Label } from '../core/models/Label';
+import { LabelService } from '../core/service/label.service';
 
 export const MY_FORMATS = {
   parse: {
@@ -31,9 +34,17 @@ export class SidebarComponent implements OnInit {
 
   @Input() public toggleNav : Subject<any>;
 
-  constructor(private router: Router) { }
+  public labels : Label[] = [];
+
+  constructor(
+    private router: Router,
+    private dialog : MatDialog,
+    private labelService : LabelService
+    ) { }
 
   ngOnInit() {
+    this.getLabel();
+
     this.toggleNav.subscribe(event => {
       if(this.drawer){
         this.drawer.toggle();
@@ -41,9 +52,18 @@ export class SidebarComponent implements OnInit {
     })
   }
 
+  getLabel(){
+    this.labelService.retrieveLabel().subscribe(label => {
+      this.labels = label;
+      console.log(this.labels);
+      console.log(label)
+    })
+  }
+
   fetchArchiveNote(){
     this.router.navigate(['home/archivenote']);
   }
+  
   fetchNote(){
     this.router.navigate(['home/note']);
   }
@@ -52,6 +72,15 @@ export class SidebarComponent implements OnInit {
     this.router.navigate(['home/trashnote']);
   }
 
-  
+  fetchLabelNote(){
+    this.router.navigate(['home/labelspecificnote'])
+  }
+
+  openDialog(){
+    const dialogRef = this.dialog.open(EditlabelComponent, {
+      width: '300px',
+      data:''
+    });
+  }
 
 }

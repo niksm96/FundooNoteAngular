@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { HomenotebodyComponent } from './homenotebody.component';
+import { EditlabelComponent } from './editlabel.component';
 
-describe('HomenotebodyComponent', () => {
-  let component: HomenotebodyComponent;
-  let fixture: ComponentFixture<HomenotebodyComponent>;
+describe('EditlabelComponent', () => {
+  let component: EditlabelComponent;
+  let fixture: ComponentFixture<EditlabelComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ HomenotebodyComponent ]
+      declarations: [ EditlabelComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(HomenotebodyComponent);
+    fixture = TestBed.createComponent(EditlabelComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

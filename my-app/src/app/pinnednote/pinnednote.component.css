@@ -1,0 +1,9 @@
+.card-item {
+    padding: 3px 3px 3px 3px;
+    width:60%;
+    position:relative;
+  }
+
+  .end{
+    margin-left: auto;
+  }

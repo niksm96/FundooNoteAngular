@@ -4,7 +4,6 @@ import { Note } from '../core/models/Note';
 import { NoteService } from '../core/service/note.service';
 import { MatSnackBar, MatDialog } from '@angular/material';
 import { ActivatedRoute, Router } from '@angular/router';
-import { UpdatenoteComponent } from '../updatenote/updatenote.component';
 import { HelperServiceService } from '../core/service/helper-service.service';
 
 @Component({
@@ -76,7 +75,9 @@ export class ViewNotesComponent implements OnInit {
   }
 
   pinnedNote(note){
-    var newNote = this.helperService.pinnedService(note)
+    var newNote = this.helperService.pinnedService(note);
+    // note.pinned = 1;
+    console.log(newNote);
     this.noteService.updateNote(newNote).subscribe(response => {
       this.snackBar.open("Note Pinned Successfully", "OK", {
         duration: 3000,

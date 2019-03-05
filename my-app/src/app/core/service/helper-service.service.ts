@@ -47,4 +47,18 @@ export class HelperServiceService {
     }
   }
 
+  unPinService(note){
+    return {
+      ...note,
+      pinned : false
+    }
+  }
+
+  unArchiveNoteService(note) {
+    return {
+      ...note,
+      archive: false
+    }
+  }
+
 }

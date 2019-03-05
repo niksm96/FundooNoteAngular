@@ -8,7 +8,6 @@ import { AppMaterialModule } from './app-material.module';
 import { RegisterComponent } from './register/register.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HomeComponent } from './home/home.component';
-import { HomenotebodyComponent } from './homenotebody/homenotebody.component';
 import { ForgotpasswordComponent } from './forgotpassword/forgotpassword.component';
 import { ResetpasswordComponent } from './resetpassword/resetpassword.component';
 import { UpdatenoteComponent } from './updatenote/updatenote.component';
@@ -23,6 +22,9 @@ import { SidebarComponent } from './sidebar/sidebar.component';
 import { HeaderComponent } from './header/header.component';
 import { NoteComponent } from './note/note.component';
 import { ViewNotesComponent } from './view-notes/view-notes.component';
+import { PinnednoteComponent } from './pinnednote/pinnednote.component';
+import { EditlabelComponent } from './editlabel/editlabel.component';
+import { LabelspecificnoteComponent } from './labelspecificnote/labelspecificnote.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +32,6 @@ import { ViewNotesComponent } from './view-notes/view-notes.component';
     LoginComponent,
     RegisterComponent,
     HomeComponent,
-    HomenotebodyComponent,
     ForgotpasswordComponent,
     ResetpasswordComponent,
     UpdatenoteComponent,
@@ -40,7 +41,10 @@ import { ViewNotesComponent } from './view-notes/view-notes.component';
     SidebarComponent,
     HeaderComponent,
     NoteComponent,
-    ViewNotesComponent
+    ViewNotesComponent,
+    PinnednoteComponent,
+    EditlabelComponent,
+    LabelspecificnoteComponent
   ],
   imports: [
     BrowserModule,
@@ -56,7 +60,8 @@ import { ViewNotesComponent } from './view-notes/view-notes.component';
   ],
   entryComponents: [
     UpdatenoteComponent , 
-    TrashdialogComponent   
+    TrashdialogComponent,
+    EditlabelComponent   
   ],
   providers: [],
   bootstrap: [AppComponent]

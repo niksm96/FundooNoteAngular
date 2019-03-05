@@ -13,10 +13,16 @@
       <span>
         <font size="1" face="arial" text-align="center">LABELS</font>
       </span>
-      <button mat-menu-item>
+      <button mat-menu-item (click)="openDialog()">
         <mat-icon>edit</mat-icon>
         <span>Edit Labels</span>
       </button>
+      <div *ngFor="let label of labels">
+        <button mat-menu-item (click)="fetchLabelNote()">
+          <mat-icon>label</mat-icon> &nbsp;
+          <span>{{label.labelName}}</span>
+        </button>
+      </div>
       <br>
       <mat-divider></mat-divider><br>
       <button mat-menu-item (click)="fetchArchiveNote()">
