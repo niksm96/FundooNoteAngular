@@ -5,7 +5,7 @@ import { FormControl } from '@angular/forms';
 import { MAT_DATE_FORMATS, MatDialog } from '@angular/material';
 import { EditlabelComponent } from '../editlabel/editlabel.component';
 import { Label } from '../core/models/Label';
-import { LabelService } from '../core/service/label.service';
+import { NoteService } from '../core/service/note.service';
 
 export const MY_FORMATS = {
   parse: {
@@ -39,7 +39,7 @@ export class SidebarComponent implements OnInit {
   constructor(
     private router: Router,
     private dialog : MatDialog,
-    private labelService : LabelService
+    private labelService: NoteService
     ) { }
 
   ngOnInit() {

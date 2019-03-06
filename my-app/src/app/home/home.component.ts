@@ -11,9 +11,7 @@ import { Subject } from 'rxjs';
  
 })
 export class HomeComponent implements OnInit {
-
  
-
   public toggleNav: Subject<any> = new Subject();
 
   constructor(private router:Router ) { }

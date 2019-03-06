@@ -17,9 +17,7 @@ export class NoteComponent implements OnInit {
 
   constructor(private noteService: NoteService,
     private snackBar: MatSnackBar,
-    private formBuilder: FormBuilder, 
-    private route: ActivatedRoute,
-    private router: Router
+    private formBuilder: FormBuilder
     ) { }
 
   ngOnInit() {

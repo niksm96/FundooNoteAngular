@@ -1,8 +1,8 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA, MatSnackBar } from '@angular/material';
-import { LabelService } from '../core/service/label.service';
 import { Label } from '../core/models/Label';
 import { FormGroup } from '@angular/forms';
+import { NoteService } from '../core/service/note.service';
 
 @Component({
   selector: 'app-editlabel',
@@ -17,14 +17,16 @@ export class EditlabelComponent implements OnInit {
 
   constructor(public dialogRef: MatDialogRef<EditlabelComponent>,
     @Inject(MAT_DIALOG_DATA) public data, 
-    private labelService: LabelService,
+    private labelService: NoteService,
     private snackBar: MatSnackBar) { }
 
   ngOnInit() {
+   this.retrieveLabel();
+  }
+
+  retrieveLabel(){
     this.labelService.retrieveLabel().subscribe(label => {
       this.labels = label;
-      console.log(this.labels);
-      console.log(label)
     })
   }
 

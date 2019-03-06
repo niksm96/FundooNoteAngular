@@ -1,8 +1,7 @@
 <div fxLayout="row" fxLayoutAlign="stretch">
   <mat-toolbar class="example-toolbar" fxFlex="100%;" fxFlex.xs="100%" fxFlex.sm="100%" fxFlex.md="100%">
     <mat-toolbar-row>
-      <button type="button" aria-label="Toggle sidenav" mat-icon-button 
-      (click)="toggleOnClick()" matTooltip="Menu">
+      <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="toggleOnClick()" matTooltip="Menu">
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
       <span><img src="./assets/images/google-keep.jpg" style="width:100px;"></span>
@@ -16,10 +15,15 @@
         <i ng-class="{'fa' : true, 'fa-close' : true, 'right-icon' : true, active : (searchInputVal.length > 0)}"
           ng-click="searchInputVal = ''"></i>
       </div>
-      <!-- </div> -->
       <a mat-button routerLink="/home" mat-icon-button routerLinkActive="active" matTooltip="Refresh" class="end">
         <mat-icon>refresh</mat-icon>
       </a>
+      <button *ngIf="!enable" mat-button matTooltip="Grid" title="Grid View" (click)="changeGrid()">
+        <mat-icon>view_module</mat-icon>
+      </button>
+      <button *ngIf="enable" mat-button matTooltip="Grid" title="Grid View" (click)="changeGridAgain()">
+        <mat-icon>view_agenda</mat-icon>
+      </button>
       <button mat-button [matMenuTriggerFor]="settings" mat-icon-button matTooltip="Settings" class="end">
         <mat-icon>settings</mat-icon>
       </button>

@@ -1,8 +1,11 @@
-<div fxLayout="row" fxFlex.md="70">
-  <div fxFlex *ngFor="let note of notes" class="card-item">
-    <mat-card *ngIf="note.archive && !note.trashed">
+<div fxLayout="row" fxFlex.md="70" fxLayout="row" fxLayoutAlign="center center">
+  <div fxFlex fxLayout="center center" *ngFor="let note of notes" class="card-item">
+    <mat-card *ngIf="!note.archive && !note.trashed && !note.pinned">
       <mat-card-header>
         <mat-card-title (click)=openDialog(note)>{{note.title}}</mat-card-title>
+        <button mat-icon-button matTooltip="Pin" title="Pin" class="end" (click)="pinnedNote(note)">
+          <mat-icon>colorize</mat-icon>
+        </button>
       </mat-card-header>
       <mat-card-content (click)=openDialog(note)>
         {{note.description}}
@@ -18,19 +21,19 @@
       </mat-card-content>
       <mat-card-footer>
         <div>
-          <button mat-icon-button matTooltip="Remind me">
+          <button mat-icon-button matTooltip="Remind me" title="Remind me">
             <mat-icon>add_alert</mat-icon>
           </button>
-          <button mat-icon-button matTooltip="Collaborator">
+          <button mat-icon-button matTooltip="Collaborator" title="Collaborator">
             <mat-icon>person_add</mat-icon>
           </button>
-          <button mat-icon-button matTooltip="Change color">
+          <button mat-icon-button matTooltip="Change color" title="Change Color">
             <mat-icon>palette</mat-icon>
           </button>
-          <button mat-icon-button matTooltip="Add image">
+          <button mat-icon-button matTooltip="Add image" title="Add image">
             <mat-icon>image</mat-icon>
           </button>
-          <button mat-icon-button matTooltip="Archive" (click)="unArchiveNote(note)">
+          <button mat-icon-button matTooltip="Archive" (click)="updateArchiveNote(note)">
             <mat-icon>archive</mat-icon>
           </button>
           <button mat-icon-button class="icon-button" id="more" [matMenuTriggerFor]="more">
@@ -42,7 +45,7 @@
               </button>
             </div>
             <div>
-              <button mat-button (click)=openCard()>
+              <button mat-button [matMenuTriggerFor]="more">
                 <span>Add Label</span>
               </button>
             </div>

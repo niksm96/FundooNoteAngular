@@ -1,4 +1,7 @@
-export class Note {
-    "title": "string";
-    "description": "string"
+export interface Note {
+    title: string;
+    description: string;
+    archive:boolean;
+    trashed:boolean;
+    pinned:boolean
 }

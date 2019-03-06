@@ -8,7 +8,11 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 export class HeaderComponent implements OnInit {
 
   @Output() toggle = new EventEmitter();
+  
   constructor() { }
+
+  enable = false;
+  
 
   ngOnInit() {
   }
@@ -17,4 +21,11 @@ export class HeaderComponent implements OnInit {
     this.toggle.emit();
   }
 
+  changeGrid(){
+    this.enable = true;
+  }
+
+  changeGridAgain(){
+    this.enable = false;
+  }
 }

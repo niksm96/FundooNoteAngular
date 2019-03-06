@@ -25,6 +25,8 @@ import { ViewNotesComponent } from './view-notes/view-notes.component';
 import { PinnednoteComponent } from './pinnednote/pinnednote.component';
 import { EditlabelComponent } from './editlabel/editlabel.component';
 import { LabelspecificnoteComponent } from './labelspecificnote/labelspecificnote.component';
+import { NoteFilterPipe } from './note-filter.pipe';
+import { FetchnoteComponent } from './fetchnote/fetchnote.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +46,9 @@ import { LabelspecificnoteComponent } from './labelspecificnote/labelspecificnot
     ViewNotesComponent,
     PinnednoteComponent,
     EditlabelComponent,
-    LabelspecificnoteComponent
+    LabelspecificnoteComponent,
+    NoteFilterPipe,
+    FetchnoteComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,11 @@
+.card-item {
+    padding: 3px 3px 3px 3px;
+    width:60%;
+    position:relative;
+    flex-direction: column;
+    display: block;
+  }
+
+  .end{
+    margin-left: auto;
+  }

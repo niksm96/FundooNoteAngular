@@ -1,67 +1,75 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { Note } from '../core/models/Note';
 import { NoteService } from '../core/service/note.service';
 import { MatSnackBar, MatDialog } from '@angular/material';
-import { FormBuilder } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
 import { HelperServiceService } from '../core/service/helper-service.service';
 
+
 @Component({
-  selector: 'app-pinnednote',
-  templateUrl: './pinnednote.component.html',
-  styleUrls: ['./pinnednote.component.css']
+  selector: 'app-fetchnote',
+  templateUrl: './fetchnote.component.html',
+  styleUrls: ['./fetchnote.component.css']
 })
-export class PinnednoteComponent implements OnInit {
+export class FetchnoteComponent implements OnInit {
+
+  selectable = true;
+  removable = true;
+  addOnBlur = true;
 
   @Input() notes
-  @Output() pinnedEvent = new EventEmitter();
+
+  @Output() fetchEvent = new EventEmitter();
 
   constructor(
     private noteService: NoteService,
     private snackBar: MatSnackBar,
-    private helperService: HelperServiceService
+    private helperService: HelperServiceService,
+    private labelService: NoteService
   ) { }
 
   ngOnInit() {
-
+    
   }
 
-  openDialog(note) {
-    this.helperService.openDialogService(note);
-  }
-
-  moveToTrash(note) {
-    var newNote = this.helperService.moveToTrashService(note);
-    this.updateCall(newNote);
-    this.snackBar.open("Note moved to trash", "OK", {
-      duration: 3000,
-    });
-
-  }
-
-  updateCall(newNote) {
+  updateNote(newNote) {
     this.noteService.updateNote(newNote).subscribe(response => {
     },
       (error) => {
         console.log(error);
-        this.snackBar.open("Sorry, something went wrong", "OK", {
+        this.snackBar.open("Sorry, something went wrong!", "OK", {
           duration: 3000,
         });
       })
   }
-  updateArchiveNote(note) {
-    var newNote = this.helperService.updateArchiveNoteService(note)
-    this.updateCall(newNote);
-    this.snackBar.open("Note archived", "OK", {
+
+  moveToTrash(note) {
+    var newNote = this.helperService.moveToTrashService(note);
+    this.updateNote(newNote);
+    this.snackBar.open("Note trashed", "OK", {
       duration: 3000,
     });
 
   }
 
-  unPinNote(note) {
-    var newNote = this.helperService.unPinService(note);
-    this.updateCall(newNote);
-    this.snackBar.open("Note un-pinned", "OK", {
+  openDialog(note): void {
+    const dialogRef = this.helperService.openDialogService(note);
+    dialogRef.afterClosed().subscribe(result => {
+      this.updateNote(note);
+      console.log('Dailog result ${result}');
+    });
+  }
+
+  updateArchiveNote(note) {
+    var newNote = this.helperService.updateArchiveNoteService(note)
+    this.updateNote(newNote);
+    this.snackBar.open("Note archived", "OK", {
+      duration: 3000,
+    });
+  }
+
+  pinnedNote(note) {
+    var newNote = this.helperService.pinnedService(note);
+    this.updateNote(newNote);
+    this.snackBar.open("Note pinned", "OK", {
       duration: 3000,
     });
   }
@@ -79,4 +87,5 @@ export class PinnednoteComponent implements OnInit {
         });
       })
   }
+
 }

@@ -4,6 +4,7 @@ import { MatSnackBar, MatDialog } from '@angular/material';
 import { Note } from '../core/models/Note';
 import { TrashdialogComponent } from '../trashdialog/trashdialog.component';
 import { HelperServiceService } from '../core/service/helper-service.service';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 @Component({
   selector: 'app-trashnote',
@@ -21,6 +22,10 @@ export class TrashnoteComponent implements OnInit {
     private helperService: HelperServiceService) { }
 
   ngOnInit() {
+    this.getNotes();
+  }
+
+  getNotes(){
     this.noteService.retrieveNote().subscribe(notes => {
       this.notes = notes;
       console.log(this.notes);

@@ -1,9 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NoteService } from '../core/service/note.service';
 import { MatSnackBar, MatDialog } from '@angular/material';
-import { FormBuilder } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
-import { UpdatenoteComponent } from '../updatenote/updatenote.component';
 import { Note } from '../core/models/Note';
 import { HelperServiceService } from '../core/service/helper-service.service';
 
@@ -19,18 +16,29 @@ export class ArchivenoteComponent implements OnInit {
   constructor(
     private noteService: NoteService,
     private snackBar: MatSnackBar,
-    private formBuilder: FormBuilder,
-    private route: ActivatedRoute,
-    private router: Router,
-    private dialog: MatDialog,
     private helperService: HelperServiceService
   ) { }
 
   ngOnInit() {
+    this.getNotes();
+  }
+
+  getNotes() {
     this.noteService.retrieveNote().subscribe(notes => {
       this.notes = notes;
       console.log(this.notes);
     });
+  }
+
+  updateNote(newNote) {
+    this.noteService.updateNote(newNote).subscribe(response => {
+    },
+      (error) => {
+        console.log(error);
+        this.snackBar.open("Sorry, something went wrong", "OK", {
+          duration: 3000,
+        });
+      })
   }
 
   openDialog(note) {
@@ -39,33 +47,34 @@ export class ArchivenoteComponent implements OnInit {
 
   moveToTrash(note) {
     var newNote = this.helperService.moveToTrashService(note);
-    this.noteService.updateNote(newNote).subscribe(response => {
-      console.log("Trash become true");
-      this.snackBar.open("Note trashed", "OK", {
-        duration: 3000,
-      });
-    },
-      (error) => {
-        console.log(error);
-        this.snackBar.open("Note trashed failed", "OK", {
-          duration: 3000,
-        });
-      })
+    this.updateNote(newNote)
+    this.snackBar.open("Note trashed", "OK", {
+      duration: 3000,
+    });
+
   }
 
   unArchiveNote(note) {
     var newNote = this.helperService.unArchiveNoteService(note)
-    this.noteService.updateNote(newNote).subscribe(response => {
-      this.snackBar.open("Note Unarchived Successfully", "OK", {
+    this.updateNote(newNote);
+    this.snackBar.open("Note un-archived", "OK", {
+      duration: 3000,
+    });
+
+  }
+
+  removeLabel(labelId, noteId) {
+    this.noteService.deleteLabelFromNote(noteId, labelId).subscribe(response => {
+      this.snackBar.open("Label removed successfully from note", "OK", {
         duration: 3000,
       });
     },
       (error) => {
         console.log(error);
-        this.snackBar.open("Note couldn't be unarchived", "OK", {
+        this.snackBar.open("Label couldn't be removed", "OK", {
           duration: 3000,
         });
       })
-
   }
+
 }
