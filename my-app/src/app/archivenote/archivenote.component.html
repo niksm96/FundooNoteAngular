@@ -1,8 +1,11 @@
 <div fxLayout="row" fxFlex.md="70">
-  <div fxFlex *ngFor="let note of notes" class="card-item">
-    <mat-card *ngIf="note.archive && !note.trashed">
+  <div fxFlex *ngFor="let note of notes | notefilter: 'archive'" class="card-item">
+    <mat-card>
       <mat-card-header>
         <mat-card-title (click)=openDialog(note)>{{note.title}}</mat-card-title>
+      <button mat-icon-button matTooltip="Pin" class="end" (click)="pinnedNote(note)">
+        <mat-icon>colorize</mat-icon>
+      </button>
       </mat-card-header>
       <mat-card-content (click)=openDialog(note)>
         {{note.description}}
@@ -31,7 +34,7 @@
             <mat-icon>image</mat-icon>
           </button>
           <button mat-icon-button matTooltip="Archive" (click)="unArchiveNote(note)">
-            <mat-icon>archive</mat-icon>
+            <mat-icon>unarchive</mat-icon>
           </button>
           <button mat-icon-button class="icon-button" id="more" [matMenuTriggerFor]="more">
             <i id="accountcircle" class="material-icons">more_vert</i></button>

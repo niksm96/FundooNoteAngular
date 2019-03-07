@@ -52,35 +52,34 @@ export class SidebarComponent implements OnInit {
     })
   }
 
-  getLabel(){
-    this.labelService.retrieveLabel().subscribe(label => {
-      this.labels = label;
-      console.log(this.labels);
-      console.log(label)
-    })
-  }
-
-  fetchArchiveNote(){
+  public fetchArchiveNote(){
     this.router.navigate(['home/archivenote']);
   }
   
-  fetchNote(){
+  public fetchNote(){
     this.router.navigate(['home/note']);
   }
 
-  fetchDeletedNote(){
+  public fetchDeletedNote(){
     this.router.navigate(['home/trashnote']);
   }
 
-  fetchLabelNote(){
+  public fetchLabelNote(){
     this.router.navigate(['home/labelspecificnote'])
   }
 
-  openDialog(){
+  public openDialog(){
     const dialogRef = this.dialog.open(EditlabelComponent, {
       width: '300px',
       data:''
     });
   }
 
+  private getLabel(){
+    this.labelService.retrieveLabel().subscribe(label => {
+      this.labels = label;
+      console.log(this.labels);
+      console.log(label)
+    })
+  }
 }

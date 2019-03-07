@@ -12,10 +12,11 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class NoteComponent implements OnInit {
 
   
-  createNoteForm: FormGroup
+  public createNoteForm: FormGroup
   
 
-  constructor(private noteService: NoteService,
+  constructor(
+    private noteService: NoteService,
     private snackBar: MatSnackBar,
     private formBuilder: FormBuilder
     ) { }
@@ -28,7 +29,7 @@ export class NoteComponent implements OnInit {
    
   }
 
-  onSubmit(note) {
+  public onSubmit(note) {
     if (this.createNoteForm.invalid) {
       this.snackBar.open("Empty note cannot be created", "OK", {
         duration: 3000,

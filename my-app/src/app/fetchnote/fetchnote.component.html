@@ -1,9 +1,13 @@
 <div fxLayout="row" fxFlex.md="70" fxLayout="row" fxLayoutAlign="center center">
-  <div fxFlex fxLayout="center center" *ngFor="let note of notes" class="card-item">
-    <mat-card *ngIf="!note.archive && !note.trashed && !note.pinned">
+  <div *ngFor="let note of notes " class="card-item">
+    <mat-card>
       <mat-card-header>
         <mat-card-title (click)=openDialog(note)>{{note.title}}</mat-card-title>
-        <button mat-icon-button matTooltip="Pin" title="Pin" class="end" (click)="pinnedNote(note)">
+        <button *ngIf="!note.pinned" mat-icon-button matTooltip="Pin" title="Pin" class="end"
+          (click)="pinnedNote('pinned',note)">
+          <mat-icon>colorize</mat-icon>
+        </button>
+        <button *ngIf="note.pinned" mat-icon-button matTooltip="Pin" class="end" (click)="pinnedNote('unpinned',note)">
           <mat-icon>colorize</mat-icon>
         </button>
       </mat-card-header>
@@ -33,21 +37,24 @@
           <button mat-icon-button matTooltip="Add image" title="Add image">
             <mat-icon>image</mat-icon>
           </button>
-          <button mat-icon-button matTooltip="Archive" (click)="updateArchiveNote(note)">
+          <button mat-icon-button matTooltip="Archive" (click)="updateArchiveNote('archive',note)">
             <mat-icon>archive</mat-icon>
           </button>
           <button mat-icon-button class="icon-button" id="more" [matMenuTriggerFor]="more">
             <i id="accountcircle" class="material-icons">more_vert</i></button>
           <mat-menu #more="matMenu" class="morecard">
             <div>
-              <button mat-button (click)=moveToTrash(note)>
+              <button mat-button (click)="moveToTrash('trashed',note)">
                 <span>Delete Note</span>
               </button>
             </div>
             <div>
-              <button mat-button [matMenuTriggerFor]="more">
-                <span>Add Label</span>
-              </button>
+              <button mat-button [matMenuTriggerFor]="menu" (click)="$event.stopPropagation()">Add Label</button>
+              <mat-menu #menu="matMenu">
+                <div *ngFor="let label of labels">
+                  <mat-checkbox (click)="$event.stopPropagation()" (click)="onChange($event)">{{label.labelName}}</mat-checkbox>
+                </div>
+              </mat-menu>
             </div>
           </mat-menu>
           <button mat-icon-button matTooltip="undo">

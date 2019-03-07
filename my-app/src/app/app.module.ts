@@ -22,11 +22,10 @@ import { SidebarComponent } from './sidebar/sidebar.component';
 import { HeaderComponent } from './header/header.component';
 import { NoteComponent } from './note/note.component';
 import { ViewNotesComponent } from './view-notes/view-notes.component';
-import { PinnednoteComponent } from './pinnednote/pinnednote.component';
 import { EditlabelComponent } from './editlabel/editlabel.component';
 import { LabelspecificnoteComponent } from './labelspecificnote/labelspecificnote.component';
-import { NoteFilterPipe } from './note-filter.pipe';
 import { FetchnoteComponent } from './fetchnote/fetchnote.component';
+import { NotefilterPipe } from './notefilter.pipe';
 
 @NgModule({
   declarations: [
@@ -44,11 +43,10 @@ import { FetchnoteComponent } from './fetchnote/fetchnote.component';
     HeaderComponent,
     NoteComponent,
     ViewNotesComponent,
-    PinnednoteComponent,
     EditlabelComponent,
     LabelspecificnoteComponent,
-    NoteFilterPipe,
-    FetchnoteComponent
+    FetchnoteComponent,
+    NotefilterPipe
   ],
   imports: [
     BrowserModule,

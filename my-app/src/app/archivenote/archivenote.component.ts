@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NoteService } from '../core/service/note.service';
 import { MatSnackBar, MatDialog } from '@angular/material';
 import { Note } from '../core/models/Note';
-import { HelperServiceService } from '../core/service/helper-service.service';
+import { UpdatenoteComponent } from '../updatenote/updatenote.component';
 
 @Component({
   selector: 'app-archivenote',
@@ -11,27 +11,22 @@ import { HelperServiceService } from '../core/service/helper-service.service';
 })
 export class ArchivenoteComponent implements OnInit {
 
-  notes: Note[] = [];
+  public notes: Note[] = [];
 
   constructor(
     private noteService: NoteService,
     private snackBar: MatSnackBar,
-    private helperService: HelperServiceService
+    private dialog : MatDialog
   ) { }
 
   ngOnInit() {
     this.getNotes();
   }
 
-  getNotes() {
-    this.noteService.retrieveNote().subscribe(notes => {
-      this.notes = notes;
-      console.log(this.notes);
-    });
-  }
 
-  updateNote(newNote) {
+  public updateNote(newNote) {
     this.noteService.updateNote(newNote).subscribe(response => {
+      this.getNotes();
     },
       (error) => {
         console.log(error);
@@ -41,29 +36,43 @@ export class ArchivenoteComponent implements OnInit {
       })
   }
 
-  openDialog(note) {
-    this.helperService.openDialogService(note);
+  public openDialog(note) {
+    const dialogRef = this.dialog.open(UpdatenoteComponent, {
+      width: '500px',
+      height: '200px',
+      data: note
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      this.getNotes();
+    });
   }
 
-  moveToTrash(note) {
-    var newNote = this.helperService.moveToTrashService(note);
-    this.updateNote(newNote)
+  public moveToTrash(note) {
+   note.trashed = 1;
+    this.updateNote(note)
     this.snackBar.open("Note trashed", "OK", {
       duration: 3000,
     });
 
   }
 
-  unArchiveNote(note) {
-    var newNote = this.helperService.unArchiveNoteService(note)
-    this.updateNote(newNote);
+  public unArchiveNote(note) {
+    note.archive = 0;
+    this.updateNote(note);
     this.snackBar.open("Note un-archived", "OK", {
       duration: 3000,
     });
-
   }
 
-  removeLabel(labelId, noteId) {
+  public pinnedNote(note) {
+    note.pinned = 1;
+    this.updateNote(note); 
+    this.snackBar.open("Note pinned", "OK", {
+      duration: 3000,
+    });
+  }
+
+  public removeLabel(labelId, noteId) {
     this.noteService.deleteLabelFromNote(noteId, labelId).subscribe(response => {
       this.snackBar.open("Label removed successfully from note", "OK", {
         duration: 3000,
@@ -77,4 +86,9 @@ export class ArchivenoteComponent implements OnInit {
       })
   }
 
+  private getNotes() {
+    this.noteService.retrieveNote().subscribe(notes => {
+      this.notes = notes;
+    });
+  }
 }

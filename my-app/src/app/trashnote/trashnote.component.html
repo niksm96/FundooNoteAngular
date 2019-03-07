@@ -1,6 +1,6 @@
 <div fxLayout="row" fxFlex.md="70">
-  <div fxFlex *ngFor="let note of notes" class="card-item">
-    <mat-card *ngIf="note.trashed">
+  <div fxFlex *ngFor="let note of notes | notefilter: 'trashed'" class="card-item">
+    <mat-card>
       <mat-card-header>
         <mat-card-title (click)=openDialog(note)>{{note.title}}</mat-card-title>
       </mat-card-header>

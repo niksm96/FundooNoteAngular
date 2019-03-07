@@ -10,37 +10,65 @@ import { NoteService } from '../core/service/note.service';
 export class UpdatenoteComponent implements OnInit {
 
   constructor(public dialogRef: MatDialogRef<UpdatenoteComponent>,
-    @Inject(MAT_DIALOG_DATA) public data, 
+    @Inject(MAT_DIALOG_DATA) public data,
     private noteService: NoteService,
     private snackBar: MatSnackBar) { }
 
   ngOnInit() {
   }
 
-  closeClick(note){
-    this.noteService.updateNote(note).subscribe(response =>{
-      this.snackBar.open("Note updated successfully", "OK", {
-        duration: 3000,
-      });
-    })
+  public closeClick(note) {
+    this.updateNote(note);
+    this.snackBar.open("Note updated successfully", "OK", {
+      duration: 3000,
+    });
     this.dialogRef.close();
   }
 
-  updateArchiveNote(note){
-    var newNote = {
-      ...note,
-      archive :true
-    }
-    this.noteService.updateNote(newNote).subscribe(response =>{
-      this.snackBar.open("Note Archived Successfully", "OK", {
-        duration: 3000,
-      });
-    },
-    (error)=>{
-      console.log(error);
-      this.snackBar.open("Note couldn't archive", "OK", {
-        duration: 3000,
-      });
-    })
+  public updateArchiveNote(note) {
+    note.archive = 1;
+    note.pinned = 0;
+    this.updateNote(note);
+    this.snackBar.open("Note updated successfully", "OK", {
+      duration: 3000,
+    });
   }
+
+  public unArchiveNote(note) {
+    note.archive = 0;
+    this.updateNote(note);
+    this.snackBar.open("Note un-archived", "OK", {
+      duration: 3000,
+    });
+  }
+
+  public pinnedNote(note) {
+    note.pinned = 1;
+    this.updateNote(note); 
+    this.snackBar.open("Note pinned", "OK", {
+      duration: 3000,
+    });
+  }
+
+  public unPinNote(note){
+    note.pinned = 0;
+    this.updateNote(note);
+    this.snackBar.open("Note un-pinned", "OK", {
+      duration: 3000,
+    });
+  }
+
+
+  private updateNote(note) {
+    this.noteService.updateNote(note).subscribe(response => {
+    },
+      (error) => {
+        console.log(error);
+        this.snackBar.open("Sorry ,Something went wrong!", "OK", {
+          duration: 3000,
+        });
+      })
+  }
+
+
 }

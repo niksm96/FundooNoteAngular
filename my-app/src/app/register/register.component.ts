@@ -10,9 +10,9 @@ import { MatSnackBar } from '@angular/material';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
-  registerForm: FormGroup;
-  loading = false;
-  submitted = false;
+  public registerForm: FormGroup;
+  public submitted = false;
+  
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
@@ -31,7 +31,7 @@ export class RegisterComponent implements OnInit {
 
   get f() { return this.registerForm.controls; }
 
-  onSubmit(user) {
+  public onSubmit(user) {
     this.submitted = true;
 
     // stop here if form is invalid

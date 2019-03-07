@@ -11,9 +11,9 @@ import { NoteService } from '../core/service/note.service';
 })
 export class EditlabelComponent implements OnInit {
 
-  labels: Label[] = [];
+  public labels: Label[] = [];
 
-  createLabelForm = FormGroup
+  public createLabelForm = FormGroup
 
   constructor(public dialogRef: MatDialogRef<EditlabelComponent>,
     @Inject(MAT_DIALOG_DATA) public data, 
@@ -24,17 +24,12 @@ export class EditlabelComponent implements OnInit {
    this.retrieveLabel();
   }
 
-  retrieveLabel(){
-    this.labelService.retrieveLabel().subscribe(label => {
-      this.labels = label;
-    })
-  }
-
-  closeClick(){
+  
+  public closeClick(){
     this.dialogRef.close();
   }
 
-  updateLabel(label,labelName){
+  public updateLabel(label,labelName){
     var name= labelName.innerHTML;
     var newLabel = 
     {
@@ -56,7 +51,7 @@ export class EditlabelComponent implements OnInit {
     })
   }
 
-  deleteLabel(labelId){
+  public deleteLabel(labelId){
     this.labelService.deleteLabel(labelId).subscribe(response => {
       this.ngOnInit();
       this.snackBar.open("Label Deleted Successfully", "OK", {
@@ -71,7 +66,7 @@ export class EditlabelComponent implements OnInit {
     })
   }
 
-  createLabel(label){
+  public createLabel(label){
     var name= label.innerHTML;
     var newLabel = 
     {
@@ -91,4 +86,11 @@ export class EditlabelComponent implements OnInit {
       });
     })
   }
+
+  private retrieveLabel(){
+    this.labelService.retrieveLabel().subscribe(label => {
+      this.labels = label;
+    })
+  }
+
 }

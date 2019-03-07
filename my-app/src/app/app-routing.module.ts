@@ -8,7 +8,6 @@ import { ResetpasswordComponent } from './resetpassword/resetpassword.component'
 import { ArchivenoteComponent } from './archivenote/archivenote.component';
 import { TrashnoteComponent } from './trashnote/trashnote.component';
 import { ViewNotesComponent } from './view-notes/view-notes.component';
-import { PinnednoteComponent } from './pinnednote/pinnednote.component';
 import { LabelspecificnoteComponent } from './labelspecificnote/labelspecificnote.component';
 
 const routes: Routes = [
@@ -20,7 +19,6 @@ const routes: Routes = [
     children: [
       { path: '', redirectTo: 'note', pathMatch: 'full' },
       { path: 'note', component: ViewNotesComponent },
-      { path: 'pinnednote', component: PinnednoteComponent },
       { path: 'archivenote', component: ArchivenoteComponent },
       { path: 'trashnote', component: TrashnoteComponent},
       { path: 'labelspecificnote', component: LabelspecificnoteComponent},

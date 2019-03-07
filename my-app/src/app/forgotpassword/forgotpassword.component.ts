@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from '../core/service/user.service';
 import { MatSnackBar } from '@angular/material';
 
@@ -11,14 +10,13 @@ import { MatSnackBar } from '@angular/material';
 })
 export class ForgotpasswordComponent implements OnInit {
 
-  forgotPasswordForm: FormGroup;
-  loading = false;
-  submitted = false;
-  returnUrl: string;
-  hide = true;
+  public forgotPasswordForm: FormGroup;
+  public submitted = false;
+  public hide = true;
 
-  constructor(private formBuilder: FormBuilder, private route: ActivatedRoute,
-    private router: Router, private userService: UserService,
+  constructor(
+    private formBuilder: FormBuilder, 
+    private userService: UserService,
     private snackBar: MatSnackBar) {
 
   }
@@ -31,7 +29,7 @@ export class ForgotpasswordComponent implements OnInit {
 
   get f() { return this.forgotPasswordForm.controls; }
 
-  onSubmit(emailId) {
+  public onSubmit(emailId) {
     this.submitted = true;
 
     if (this.forgotPasswordForm.invalid) {

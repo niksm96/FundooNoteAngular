@@ -11,7 +11,7 @@ export class HeaderComponent implements OnInit {
   
   constructor() { }
 
-  enable = false;
+  public enable = false;
   
 
   ngOnInit() {
@@ -21,7 +21,7 @@ export class HeaderComponent implements OnInit {
     this.toggle.emit();
   }
 
-  changeGrid(){
+  public changeGrid(){
     this.enable = true;
   }
 

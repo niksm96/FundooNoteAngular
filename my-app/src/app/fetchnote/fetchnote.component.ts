@@ -1,7 +1,8 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { NoteService } from '../core/service/note.service';
 import { MatSnackBar, MatDialog } from '@angular/material';
-import { HelperServiceService } from '../core/service/helper-service.service';
+import { UpdatenoteComponent } from '../updatenote/updatenote.component';
+import { Label } from '../core/models/Label';
 
 
 @Component({
@@ -11,70 +12,64 @@ import { HelperServiceService } from '../core/service/helper-service.service';
 })
 export class FetchnoteComponent implements OnInit {
 
-  selectable = true;
-  removable = true;
-  addOnBlur = true;
-
   @Input() notes
 
   @Output() fetchEvent = new EventEmitter();
 
+  public labels: Label[] = [];
+  
   constructor(
     private noteService: NoteService,
     private snackBar: MatSnackBar,
-    private helperService: HelperServiceService,
-    private labelService: NoteService
+    private dialog: MatDialog
   ) { }
 
   ngOnInit() {
-    
+    this.retrieveLabel();
   }
 
-  updateNote(newNote) {
-    this.noteService.updateNote(newNote).subscribe(response => {
-    },
-      (error) => {
-        console.log(error);
-        this.snackBar.open("Sorry, something went wrong!", "OK", {
-          duration: 3000,
-        });
-      })
-  }
-
-  moveToTrash(note) {
-    var newNote = this.helperService.moveToTrashService(note);
-    this.updateNote(newNote);
+  public moveToTrash(key, note) {
+    note.trashed = 1;
+    const data = { key, note };
+    this.fetchEvent.emit(data)
     this.snackBar.open("Note trashed", "OK", {
       duration: 3000,
     });
 
   }
 
-  openDialog(note): void {
-    const dialogRef = this.helperService.openDialogService(note);
+  public openDialog(note): void {
+    const dialogRef = this.dialog.open(UpdatenoteComponent, {
+      width: '500px',
+      height: '200px',
+      data: note
+    });
     dialogRef.afterClosed().subscribe(result => {
-      this.updateNote(note);
-      console.log('Dailog result ${result}');
+      const data = { note };
+      this.fetchEvent.emit(data);
     });
   }
 
-  updateArchiveNote(note) {
-    var newNote = this.helperService.updateArchiveNoteService(note)
-    this.updateNote(newNote);
+  public updateArchiveNote(key, note) {
+    note.pinned = 0;
+    note.archive = 1;
+    const data = { key, note };
+    this.fetchEvent.emit(data);
     this.snackBar.open("Note archived", "OK", {
       duration: 3000,
     });
   }
 
-  pinnedNote(note) {
-    var newNote = this.helperService.pinnedService(note);
-    this.updateNote(newNote);
+  public pinnedNote(key, note) {
+    note.pinned = key === 'pinned' ? 1 : 0;
+    const data = { key, note };
+    this.fetchEvent.emit(data);
     this.snackBar.open("Note pinned", "OK", {
       duration: 3000,
     });
   }
 
-  removeLabel(labelId, noteId) {
+  public removeLabel(labelId, noteId) {
     this.noteService.deleteLabelFromNote(noteId, labelId).subscribe(response => {
       this.snackBar.open("Label removed successfully from note", "OK", {
         duration: 3000,
@@ -86,6 +81,12 @@ export class FetchnoteComponent implements OnInit {
           duration: 3000,
         });
       })
+  }
+
+  private retrieveLabel() {
+    this.noteService.retrieveLabel().subscribe(label => {
+      this.labels = label;
+    })
   }
 
 }

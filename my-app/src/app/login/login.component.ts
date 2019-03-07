@@ -11,11 +11,9 @@ import { MatSnackBar } from '@angular/material';
 })
 export class LoginComponent implements OnInit {
 
-  loginForm: FormGroup;
-  loading = false;
-  submitted = false;
-  returnUrl: string;
-  hide = true;
+  public loginForm: FormGroup;
+  public submitted = false;
+  public hide = true;
 
   constructor(private formBuilder: FormBuilder, private route: ActivatedRoute,
     private router: Router, private userService: UserService,
