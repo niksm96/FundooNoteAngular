@@ -28,7 +28,7 @@ export class HttputilService {
     return this.http.post<any>(url,object,header);
   }
 
-  postServiceOnlyHeader(url,header){
-    return this.http.post<any>(url,header);
+  putServiceOnlyHeader(url,header){
+    return this.http.put<any>(url,header,{observe : 'response'});
   }
 }

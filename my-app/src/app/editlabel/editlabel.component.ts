@@ -13,8 +13,6 @@ export class EditlabelComponent implements OnInit {
 
   public labels: Label[] = [];
 
-  public createLabelForm = FormGroup
-
   constructor(public dialogRef: MatDialogRef<EditlabelComponent>,
     @Inject(MAT_DIALOG_DATA) public data, 
     private labelService: NoteService,

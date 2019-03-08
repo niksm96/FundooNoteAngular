@@ -1,6 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA, MatSnackBar } from '@angular/material';
 import { NoteService } from '../core/service/note.service';
+import { Label } from '../core/models/Label';
 
 @Component({
   selector: 'app-updatenote',
@@ -8,6 +9,9 @@ import { NoteService } from '../core/service/note.service';
   styleUrls: ['./updatenote.component.css']
 })
 export class UpdatenoteComponent implements OnInit {
+
+  public removable = true;
+
 
   constructor(public dialogRef: MatDialogRef<UpdatenoteComponent>,
     @Inject(MAT_DIALOG_DATA) public data,
@@ -58,6 +62,10 @@ export class UpdatenoteComponent implements OnInit {
     });
   }
 
+  addLabelToNote(data){
+    this.updateNote(data.note);
+
+  }
 
   private updateNote(note) {
     this.noteService.updateNote(note).subscribe(response => {
@@ -69,6 +77,5 @@ export class UpdatenoteComponent implements OnInit {
         });
       })
   }
-
 
 }

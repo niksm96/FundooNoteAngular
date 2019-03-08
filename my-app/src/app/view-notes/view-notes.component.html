@@ -2,12 +2,11 @@
 
 <div fxLayout="column">
   Pinned
-  <!-- <app-pinnednote [notes]="notes" (pinnedEvent)="refresh($event)"></app-pinnednote> -->
   <app-fetchnote [notes]="notes | notefilter: 'pinned'" (fetchEvent)="refresh($event)"></app-fetchnote>
 </div>
 
 
 <div fxLayout="column">
   Others
-  <app-fetchnote [notes]="notes | notefilter" (fetchEvent)="refresh($event)"></app-fetchnote>
+  <app-fetchnote [notes]="notes | notefilter: ''" (fetchEvent)="refresh($event)"></app-fetchnote>
 </div>

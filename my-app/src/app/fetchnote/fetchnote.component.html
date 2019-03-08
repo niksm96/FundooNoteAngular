@@ -17,7 +17,7 @@
       <mat-card-content>
         <mat-chip-list #chipList>
           <mat-chip *ngFor="let label of note.listOfLabels" [selectable]="selectable" [removable]="removable"
-            (removed)="removeLabel(label.labelId,note.noteId)">
+            (removed)="removeLabel(label.labelId,note)">
             {{label.labelName}}
             <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
           </mat-chip>
@@ -37,8 +37,12 @@
           <button mat-icon-button matTooltip="Add image" title="Add image">
             <mat-icon>image</mat-icon>
           </button>
-          <button mat-icon-button matTooltip="Archive" (click)="updateArchiveNote('archive',note)">
+          <button *ngIf="!note.archive" mat-icon-button matTooltip="Archive"
+            (click)="updateArchiveNote('archive',note)">
             <mat-icon>archive</mat-icon>
+          </button>
+          <button *ngIf="note.archive" mat-icon-button matTooltip="Archive" (click)="updateArchiveNote('unarchive',note)">
+            <mat-icon>unarchive</mat-icon>
           </button>
           <button mat-icon-button class="icon-button" id="more" [matMenuTriggerFor]="more">
             <i id="accountcircle" class="material-icons">more_vert</i></button>
@@ -49,12 +53,7 @@
               </button>
             </div>
             <div>
-              <button mat-button [matMenuTriggerFor]="menu" (click)="$event.stopPropagation()">Add Label</button>
-              <mat-menu #menu="matMenu">
-                <div *ngFor="let label of labels">
-                  <mat-checkbox (click)="$event.stopPropagation()" (click)="onChange($event)">{{label.labelName}}</mat-checkbox>
-                </div>
-              </mat-menu>
+              <app-add-label-to-note [note]=note (addLabelToNoteEvent)="addLabelToNote($event)"></app-add-label-to-note>
             </div>
           </mat-menu>
           <button mat-icon-button matTooltip="undo">

@@ -12,8 +12,17 @@
 <div>
   <input matInput [(ngModel)]="data.description" [value]=data.description placeholder="Description">
 </div>
+<br>
 <div>
-  <br>
+  <mat-chip-list #chipList>
+    <mat-chip *ngFor="let label of data.listOfLabels" [selectable]="selectable" [removable]="removable"
+      (removed)="removeLabel(label.labelId,data)">
+      {{label.labelName}}
+      <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+    </mat-chip>
+  </mat-chip-list>
+</div>
+<div>
   <br>
   <button mat-icon-button matTooltip="Remind me">
     <mat-icon>add_alert</mat-icon>
@@ -36,7 +45,12 @@
   <button mat-icon-button class="icon-button" id="more" [matMenuTriggerFor]="more">
     <i id="accountcircle" class="material-icons">more_vert</i></button>
   <mat-menu #more="matMenu" class="morecard">
-    <button mat-button (click)=onDelete(data)>Delete Note</button>
+    <div>
+      <button mat-button (click)=onDelete(data)>Delete Note</button>
+    </div>
+    <div>
+        <app-add-label-to-note [note]="data" (addLabelToNoteEvent)="addLabelToNote($event)"></app-add-label-to-note>
+    </div>
   </mat-menu>
   <button mat-icon-button matTooltip="undo">
     <mat-icon>undo</mat-icon>

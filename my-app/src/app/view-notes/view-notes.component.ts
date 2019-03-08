@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Note } from '../core/models/Note';
 import { NoteService } from '../core/service/note.service';
 import { MatSnackBar } from '@angular/material';
+import { Label } from '../core/models/Label';
 
 @Component({
   selector: 'app-view-notes',
@@ -11,6 +12,8 @@ import { MatSnackBar } from '@angular/material';
 export class ViewNotesComponent implements OnInit {
 
   public notes: Note[] = [];
+
+  public labels:Label[] = [];
 
   constructor(
     private noteService: NoteService,
@@ -26,8 +29,8 @@ export class ViewNotesComponent implements OnInit {
     this.updateNote(event.note);
   }
 
-  private updateNote(newNote) {
-    this.noteService.updateNote(newNote).subscribe(response => {
+  private updateNote(note) {
+    this.noteService.updateNote(note).subscribe(response => {
       this.getNotes();
     },
       (error) => {

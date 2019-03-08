@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { NoteService } from '../core/service/note.service';
 import { MatSnackBar, MatDialog } from '@angular/material';
 import { Note } from '../core/models/Note';
 import { UpdatenoteComponent } from '../updatenote/updatenote.component';
+import { Label } from '../core/models/Label';
 
 @Component({
   selector: 'app-archivenote',
@@ -13,74 +14,29 @@ export class ArchivenoteComponent implements OnInit {
 
   public notes: Note[] = [];
 
+  public labels:Label[] = [];
+
   constructor(
     private noteService: NoteService,
-    private snackBar: MatSnackBar,
-    private dialog : MatDialog
+    private snackBar : MatSnackBar
   ) { }
 
   ngOnInit() {
     this.getNotes();
   }
 
+  public refresh(event) {
+    console.log(event.note);
+    this.updateNote(event.note);
+  }
 
-  public updateNote(newNote) {
-    this.noteService.updateNote(newNote).subscribe(response => {
+  private updateNote(note) {
+    this.noteService.updateNote(note).subscribe(response => {
       this.getNotes();
     },
       (error) => {
         console.log(error);
-        this.snackBar.open("Sorry, something went wrong", "OK", {
-          duration: 3000,
-        });
-      })
-  }
-
-  public openDialog(note) {
-    const dialogRef = this.dialog.open(UpdatenoteComponent, {
-      width: '500px',
-      height: '200px',
-      data: note
-    });
-    dialogRef.afterClosed().subscribe(result => {
-      this.getNotes();
-    });
-  }
-
-  public moveToTrash(note) {
-   note.trashed = 1;
-    this.updateNote(note)
-    this.snackBar.open("Note trashed", "OK", {
-      duration: 3000,
-    });
-
-  }
-
-  public unArchiveNote(note) {
-    note.archive = 0;
-    this.updateNote(note);
-    this.snackBar.open("Note un-archived", "OK", {
-      duration: 3000,
-    });
-  }
-
-  public pinnedNote(note) {
-    note.pinned = 1;
-    this.updateNote(note); 
-    this.snackBar.open("Note pinned", "OK", {
-      duration: 3000,
-    });
-  }
-
-  public removeLabel(labelId, noteId) {
-    this.noteService.deleteLabelFromNote(noteId, labelId).subscribe(response => {
-      this.snackBar.open("Label removed successfully from note", "OK", {
-        duration: 3000,
-      });
-    },
-      (error) => {
-        console.log(error);
-        this.snackBar.open("Label couldn't be removed", "OK", {
+        this.snackBar.open("Sorry, something went wrong!", "OK", {
           duration: 3000,
         });
       })
@@ -89,6 +45,7 @@ export class ArchivenoteComponent implements OnInit {
   private getNotes() {
     this.noteService.retrieveNote().subscribe(notes => {
       this.notes = notes;
+      console.log(this.notes);
     });
   }
 }

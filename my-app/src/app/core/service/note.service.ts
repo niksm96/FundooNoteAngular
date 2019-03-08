@@ -63,14 +63,8 @@ export class NoteService {
     });
   }
 
-  addLabelToNote(noteId, labelId) {
-    return this.httpUtil.postServiceOnlyHeader(environment.note_url + 'addlabeltonote', {
-      params: {
-        noteId: noteId,
-        labelId: labelId
-      },
-      observe: 'response'
-    });
+  addLabelToNote(noteId, label) {
+    return this.httpUtil.putServiceOnlyHeader(environment.note_url + 'addlabeltonote/'+noteId,label)
   }
 
 }

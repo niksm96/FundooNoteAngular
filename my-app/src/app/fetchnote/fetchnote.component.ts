@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { NoteService } from '../core/service/note.service';
-import { MatSnackBar, MatDialog } from '@angular/material';
+import { MatSnackBar, MatDialog, MatChipInputEvent } from '@angular/material';
 import { UpdatenoteComponent } from '../updatenote/updatenote.component';
 import { Label } from '../core/models/Label';
 
@@ -12,12 +12,12 @@ import { Label } from '../core/models/Label';
 })
 export class FetchnoteComponent implements OnInit {
 
+  public removable = true;
+  
   @Input() notes
 
   @Output() fetchEvent = new EventEmitter();
 
-  public labels: Label[] = [];
-  
   constructor(
     private noteService: NoteService,
     private snackBar: MatSnackBar,
@@ -25,7 +25,7 @@ export class FetchnoteComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.retrieveLabel();
+
   }
 
   public moveToTrash(key, note) {
@@ -52,7 +52,7 @@ export class FetchnoteComponent implements OnInit {
 
   public updateArchiveNote(key, note) {
     note.pinned = 0;
-    note.archive = 1;
+    note.archive = key == 'archive'? 1 : 0;
     const data = { key, note };
     this.fetchEvent.emit(data);
     this.snackBar.open("Note archived", "OK", {
@@ -69,8 +69,10 @@ export class FetchnoteComponent implements OnInit {
     });
   }
 
-  public removeLabel(labelId, noteId) {
-    this.noteService.deleteLabelFromNote(noteId, labelId).subscribe(response => {
+  public removeLabel(labelId, note) {
+    this.noteService.deleteLabelFromNote(note.noteId, labelId).subscribe(response => {
+      const data = { note };
+      this.fetchEvent.emit(data);
       this.snackBar.open("Label removed successfully from note", "OK", {
         duration: 3000,
       });
@@ -83,10 +85,8 @@ export class FetchnoteComponent implements OnInit {
       })
   }
 
-  private retrieveLabel() {
-    this.noteService.retrieveLabel().subscribe(label => {
-      this.labels = label;
-    })
-  }
+  addLabelToNote(data){
+    this.fetchEvent.emit(data);
 
+  }
 }

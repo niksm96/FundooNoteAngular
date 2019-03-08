@@ -26,6 +26,8 @@ import { EditlabelComponent } from './editlabel/editlabel.component';
 import { LabelspecificnoteComponent } from './labelspecificnote/labelspecificnote.component';
 import { FetchnoteComponent } from './fetchnote/fetchnote.component';
 import { NotefilterPipe } from './notefilter.pipe';
+import { SearchnotePipe } from './searchnote.pipe';
+import { AddLabelToNoteComponent } from './add-label-to-note/add-label-to-note.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +48,9 @@ import { NotefilterPipe } from './notefilter.pipe';
     EditlabelComponent,
     LabelspecificnoteComponent,
     FetchnoteComponent,
-    NotefilterPipe
+    NotefilterPipe,
+    SearchnotePipe,
+    AddLabelToNoteComponent
   ],
   imports: [
     BrowserModule,
