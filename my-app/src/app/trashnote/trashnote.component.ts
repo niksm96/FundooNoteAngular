@@ -1,26 +1,33 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { NoteService } from '../core/service/note.service';
 import { MatSnackBar, MatDialog } from '@angular/material';
 import { Note } from '../core/models/Note';
 import { TrashdialogComponent } from '../trashdialog/trashdialog.component';
+import { KeepHelperService } from '../core/service/keep-helper.service';
 
 @Component({
   selector: 'app-trashnote',
   templateUrl: './trashnote.component.html',
-  styleUrls: ['./trashnote.component.css']
+  styleUrls: ['./trashnote.component.scss']
 })
 export class TrashnoteComponent implements OnInit {
 
   notes: Note[] = [];
 
+  @Input() grid = false;
+
   constructor(
     private noteService: NoteService,
     private snackBar: MatSnackBar,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private helper: KeepHelperService
     ) { }
 
   ngOnInit() {
     this.getNotes();
+    this.helper.getTheme().subscribe((response)=>{
+      this.grid = response;
+    })
   }
 
   public onDelete(note) {

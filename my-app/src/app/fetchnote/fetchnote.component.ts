@@ -8,13 +8,15 @@ import { Label } from '../core/models/Label';
 @Component({
   selector: 'app-fetchnote',
   templateUrl: './fetchnote.component.html',
-  styleUrls: ['./fetchnote.component.css']
+  styleUrls: ['./fetchnote.component.scss']
 })
 export class FetchnoteComponent implements OnInit {
 
   public removable = true;
   
   @Input() notes
+
+  @Input() grid = false
 
   @Output() fetchEvent = new EventEmitter();
 

@@ -6,7 +6,7 @@ import { Label } from '../core/models/Label';
 @Component({
   selector: 'app-updatenote',
   templateUrl: './updatenote.component.html',
-  styleUrls: ['./updatenote.component.css']
+  styleUrls: ['./updatenote.component.scss']
 })
 export class UpdatenoteComponent implements OnInit {
 

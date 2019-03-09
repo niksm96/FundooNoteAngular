@@ -5,7 +5,7 @@ import { NoteService } from '../core/service/note.service';
 @Component({
   selector: 'app-trashdialog',
   templateUrl: './trashdialog.component.html',
-  styleUrls: ['./trashdialog.component.css']
+  styleUrls: ['./trashdialog.component.scss']
 })
 export class TrashdialogComponent implements OnInit {
 

@@ -21,7 +21,7 @@
       <button *ngIf="!enable" mat-button matTooltip="Grid" title="Grid View" (click)="changeGrid()">
         <mat-icon>view_module</mat-icon>
       </button>
-      <button *ngIf="enable" mat-button matTooltip="Grid" title="Grid View" (click)="changeGridAgain()">
+      <button *ngIf="enable" mat-button matTooltip="Grid" title="Grid View" (click)="changeGrid()">
         <mat-icon>view_agenda</mat-icon>
       </button>
       <button mat-button [matMenuTriggerFor]="settings" mat-icon-button matTooltip="Settings" class="end">

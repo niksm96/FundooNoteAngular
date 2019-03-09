@@ -7,7 +7,7 @@ import { notEqual } from 'assert';
 @Component({
   selector: 'app-add-label-to-note',
   templateUrl: './add-label-to-note.component.html',
-  styleUrls: ['./add-label-to-note.component.css']
+  styleUrls: ['./add-label-to-note.component.scss']
 })
 export class AddLabelToNoteComponent implements OnInit {
 
@@ -16,6 +16,8 @@ export class AddLabelToNoteComponent implements OnInit {
   @Output() addLabelToNoteEvent = new EventEmitter();
 
   labels : Label[] = [];
+
+  public filter = '';
 
   public newLabels: Label[] = [];
 

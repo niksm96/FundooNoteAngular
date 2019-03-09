@@ -1,3 +1,3 @@
 <div fxLayout="column">
-    <app-fetchnote [notes]="notes | notefilter: 'archive'" (fetchEvent)="refresh($event)"></app-fetchnote>
+    <app-fetchnote [notes]="notes | notefilter: 'archive'" [grid]="grid" (fetchEvent)="refresh($event)"></app-fetchnote>
 </div>

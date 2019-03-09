@@ -1,4 +1,4 @@
-<div fxLayout="row" fxFlex.md="70">
+<div class="gk" [ngClass]="grid ? 'gk-grid-view': 'gk-list-view'">
   <div fxFlex *ngFor="let note of notes | notefilter: 'trashed'" class="card-item">
     <mat-card>
       <mat-card-header>

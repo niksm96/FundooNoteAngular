@@ -1,27 +1,40 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Note } from '../core/models/Note';
 import { NoteService } from '../core/service/note.service';
 import { MatSnackBar } from '@angular/material';
 import { Label } from '../core/models/Label';
+import { KeepHelperService } from '../core/service/keep-helper.service';
 
 @Component({
   selector: 'app-view-notes',
   templateUrl: './view-notes.component.html',
-  styleUrls: ['./view-notes.component.css']
+  styleUrls: ['./view-notes.component.scss']
 })
-export class ViewNotesComponent implements OnInit {
+export class ViewNotesComponent implements OnInit ,OnDestroy{
 
   public notes: Note[] = [];
 
   public labels:Label[] = [];
 
+  public grid = false;
+
   constructor(
     private noteService: NoteService,
-    private snackBar : MatSnackBar
+    private snackBar : MatSnackBar,
+    private helper: KeepHelperService
   ) { }
 
   ngOnInit() {
     this.getNotes();
+    this.helper.getTheme().subscribe((res) => {
+      console.log('res:::-->', res);
+      this.grid = res;
+    });
+  }
+
+  ngOnDestroy(){
+    this.helper.getTheme().unsubscribe();
+
   }
 
   public refresh(event) {

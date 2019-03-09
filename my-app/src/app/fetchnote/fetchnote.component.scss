@@ -1,0 +1,40 @@
+
+  .end{
+    margin-left: auto;
+  }
+
+  :host {
+    .gk {
+    &-container {
+      margin: 0 20px;
+    }
+      &-grid-view {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-around;
+        mat-card{
+          width:300px;
+          position: relative;
+        }
+        // .note-content {
+        //   width: 250px;
+        //  @extend .head;
+        // }
+      }
+      &-list-view {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        justify-content: space-around;
+        mat-card{
+          width:500px;
+          position: relative;
+        }
+        // .note-content {
+        //   width: 100%;
+        //  @extend .head;
+        // }
+      }
+    }
+  }
