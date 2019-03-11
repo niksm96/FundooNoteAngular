@@ -1,9 +1,22 @@
 <button mat-button [matMenuTriggerFor]="menu" (click)="labelFilter($event, note.listOfLabels)">Add Label</button>
 <mat-menu #menu="matMenu">
-  <div fxLayout="row">
-    <input type="input" placeholder="Seach for labels" [(ngModel)]="filter" (click)="$event.stopPropagation()">
-  </div>
-  <div *ngFor="let label of newLabels | searchnote:filter">
-    <mat-checkbox (click)="onCheck($event,note,label)">{{label.labelName}}</mat-checkbox>
+  <div class="labelnote">
+    <div>
+      <span>
+        <font size="3" face="times new roman">Label Note</font>
+      </span>
+    </div>
+    <div>
+      <input matInput placeholder="Seach for labels" [(ngModel)]="filter" (click)="$event.stopPropagation()">
+    </div>
+    <div *ngFor="let label of newLabels | searchnote:filter">
+      <mat-checkbox (click)="onCheck($event,note,label)">{{label.labelName}}</mat-checkbox>
+    </div>
+    <div>
+      <button mat-button *ngIf="filter != ''" (click)="createLabel($event, filter, note)">
+        <mat-icon>add</mat-icon>
+        Create New Label "{{filter}}"
+      </button>
+    </div>
   </div>
 </mat-menu>

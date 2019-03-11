@@ -1,10 +1,7 @@
-.example-container {
-    display: flex;
-    flex-direction: column;
-    margin-right: 8px;
-  }
-  
-  .example-container > * {
-    width: 100%;
-    
-  }
+.editlabel{
+  display: flex;
+  justify-content: space-between;
+  width: auto;
+  height: auto;
+  overflow: hidden;
+}

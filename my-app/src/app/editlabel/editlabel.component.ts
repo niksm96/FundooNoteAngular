@@ -65,7 +65,13 @@ export class EditlabelComponent implements OnInit {
   }
 
   public createLabel(label){
-    var name= label.innerHTML;
+    var name = label.innerHTML;
+    if(name == ''){
+      this.snackBar.open("Empty label cannot be created", "OK", {
+        duration: 3000,
+      });
+      return;
+    }
     var newLabel = 
     {
       "labelName":name

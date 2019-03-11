@@ -32,6 +32,7 @@ export class TrashnoteComponent implements OnInit {
 
   public onDelete(note) {
     this.noteService.deleteNote(note.noteId).subscribe(response => {
+      this.getNotes();
       this.snackBar.open("Note deleted successfully", "OK", {
         duration: 3000,
       });
@@ -47,6 +48,7 @@ export class TrashnoteComponent implements OnInit {
   public restore(note) {
    note.trashed = 0;
     this.noteService.updateNote(note).subscribe(response => {
+      this.getNotes();
       this.snackBar.open("Note Restored Successfully", "OK", {
         duration: 3000,
       });

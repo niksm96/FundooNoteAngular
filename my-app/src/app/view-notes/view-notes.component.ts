@@ -10,7 +10,7 @@ import { KeepHelperService } from '../core/service/keep-helper.service';
   templateUrl: './view-notes.component.html',
   styleUrls: ['./view-notes.component.scss']
 })
-export class ViewNotesComponent implements OnInit ,OnDestroy{
+export class ViewNotesComponent implements OnInit{
 
   public notes: Note[] = [];
 
@@ -27,16 +27,10 @@ export class ViewNotesComponent implements OnInit ,OnDestroy{
   ngOnInit() {
     this.getNotes();
     this.helper.getTheme().subscribe((res) => {
-      console.log('res:::-->', res);
       this.grid = res;
     });
   }
-
-  ngOnDestroy(){
-    this.helper.getTheme().unsubscribe();
-
-  }
-
+  
   public refresh(event) {
     console.log(event.note);
     this.updateNote(event.note);

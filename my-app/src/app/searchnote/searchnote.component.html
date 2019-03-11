@@ -1,0 +1,2 @@
+<app-fetchnote [notes]="notes | searchfilter : searchInput" (fetchEvent)="refresh($event)"></app-fetchnote>
+<app-fetchnote [notes]="notes | searchfilter : searchnote" (fetchEvent)="refresh($event)"></app-fetchnote>

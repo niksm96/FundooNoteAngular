@@ -1,8 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Label } from '../core/models/Label';
 import { NoteService } from '../core/service/note.service';
-import { MatSnackBar, MatDialog } from '@angular/material';
-import { notEqual } from 'assert';
+import { MatSnackBar} from '@angular/material';
 
 @Component({
   selector: 'app-add-label-to-note',
@@ -15,7 +14,7 @@ export class AddLabelToNoteComponent implements OnInit {
 
   @Output() addLabelToNoteEvent = new EventEmitter();
 
-  labels : Label[] = [];
+  labels: Label[] = [];
 
   public filter = '';
 
@@ -64,4 +63,44 @@ export class AddLabelToNoteComponent implements OnInit {
       this.labels = label;
     })
   }
+
+  public createLabel(event, filter, note) {
+    event.stopPropagation();
+    if (note.listOfLabels.some((label) => label.labelName == filter) || this.newLabels.some((label) => label.labelName == filter)) {
+      this.snackBar.open("Label name already exists", "OK", {
+        duration: 3000,
+      });
+      return;
+    }
+    this.createLabelMethod(filter,note);
+  }
+
+  private createLabelMethod(label, note) {
+    if (label == '') {
+      this.snackBar.open("Empty label cannot be created", "OK", {
+        duration: 3000,
+      });
+      return;
+    }
+    var newLabel =
+    {
+      "labelName": label
+    }
+    this.noteService.createLabel(newLabel).subscribe(returnedLabel => {
+      this.noteService.addLabelToNote(note.noteId, returnedLabel).subscribe(response => {
+        const data = { note };
+        this.addLabelToNoteEvent.emit(data);
+        this.snackBar.open("Label added to note successfully", "OK", {
+          duration: 3000,
+        });
+      })
+    },
+      (error) => {
+        console.log(error);
+        this.snackBar.open("Label Creation Failed", "OK", {
+          duration: 3000,
+        });
+      })
+  }
+
 }

@@ -6,7 +6,8 @@
   :host {
     .gk {
     &-container {
-      margin: 0 20px;
+      margin: auto;
+    
     }
       &-grid-view {
         display: flex;
@@ -17,10 +18,6 @@
           width:300px;
           position: relative;
         }
-        // .note-content {
-        //   width: 250px;
-        //  @extend .head;
-        // }
       }
       &-list-view {
         display: flex;
@@ -30,11 +27,8 @@
         mat-card{
           width:500px;
           position: relative;
+          margin: auto;
         }
-        // .note-content {
-        //   width: 100%;
-        //  @extend .head;
-        // }
       }
     }
   }

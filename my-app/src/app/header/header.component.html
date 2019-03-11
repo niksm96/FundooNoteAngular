@@ -11,9 +11,12 @@
       </span>
       <div class="slinput" ng-init="">
         <i class="fa fa-search left-icon"></i>
-        <input matInput type="search" placeholder="Search here" ng-model="searchInputVal" />
-        <i ng-class="{'fa' : true, 'fa-close' : true, 'right-icon' : true, active : (searchInputVal.length > 0)}"
-          ng-click="searchInputVal = ''"></i>
+        <input matInput type="search" placeholder="Search here" [(ngModel)]="searchInput" (click)=searchBar()>
+        <i ng-class="{'fa' : true, 'fa-close' : true, 'right-icon' : true, active : (searchInput.length > 0)}"
+          ng-click="searchInput = ''"></i>
+        <button mat-button (click)="closeSearch()">
+          <mat-icon>close</mat-icon>
+        </button>
       </div>
       <a mat-button routerLink="/home" mat-icon-button routerLinkActive="active" matTooltip="Refresh" class="end">
         <mat-icon>refresh</mat-icon>

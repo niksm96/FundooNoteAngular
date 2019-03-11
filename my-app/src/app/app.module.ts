@@ -28,6 +28,8 @@ import { FetchnoteComponent } from './fetchnote/fetchnote.component';
 import { NotefilterPipe } from './notefilter.pipe';
 import { SearchnotePipe } from './searchnote.pipe';
 import { AddLabelToNoteComponent } from './add-label-to-note/add-label-to-note.component';
+import { SearchnoteComponent } from './searchnote/searchnote.component';
+import { SearchfilterPipe } from './searchfilter.pipe';
 
 @NgModule({
   declarations: [
@@ -50,7 +52,9 @@ import { AddLabelToNoteComponent } from './add-label-to-note/add-label-to-note.c
     FetchnoteComponent,
     NotefilterPipe,
     SearchnotePipe,
-    AddLabelToNoteComponent
+    AddLabelToNoteComponent,
+    SearchnoteComponent,
+    SearchfilterPipe
   ],
   imports: [
     BrowserModule,

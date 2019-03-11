@@ -9,7 +9,7 @@ export class SearchnotePipe implements PipeTransform {
   transform(labels:Label[] , searchValue: any): any {
     console.log(labels, searchValue);
     if (!searchValue) {
-      return labels;
+      return null;
     }
     else {
       return labels.filter(({labelName}) => {
