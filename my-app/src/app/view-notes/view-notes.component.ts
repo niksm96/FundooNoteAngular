@@ -1,14 +1,16 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Note } from '../core/models/Note';
 import { NoteService } from '../core/service/note.service';
 import { MatSnackBar } from '@angular/material';
 import { Label } from '../core/models/Label';
 import { KeepHelperService } from '../core/service/keep-helper.service';
+import { SearchfilterPipe } from '../searchfilter.pipe';
 
 @Component({
   selector: 'app-view-notes',
   templateUrl: './view-notes.component.html',
-  styleUrls: ['./view-notes.component.scss']
+  styleUrls: ['./view-notes.component.scss'],
+  providers:[SearchfilterPipe]
 })
 export class ViewNotesComponent implements OnInit{
 
@@ -18,10 +20,13 @@ export class ViewNotesComponent implements OnInit{
 
   public grid = false;
 
+  public searchInput = '';
+
   constructor(
     private noteService: NoteService,
     private snackBar : MatSnackBar,
-    private helper: KeepHelperService
+    private helper: KeepHelperService,
+    private searchFilter:SearchfilterPipe
   ) { }
 
   ngOnInit() {
@@ -29,10 +34,20 @@ export class ViewNotesComponent implements OnInit{
     this.helper.getTheme().subscribe((res) => {
       this.grid = res;
     });
+    this.helper.getSearchBar().subscribe((query) => {
+      console.log('response', query);
+    //   if(!query){
+    //     this.getNotes(); 
+    //     return;
+    //   }
+    //   this.notes = this.notes.filter((item) => 
+    //   item.title.toLowerCase().includes(query.toLowerCase()));
+    // });
+    this.searchFilter.transform(this.notes,this.searchInput);
+    });
   }
   
   public refresh(event) {
-    console.log(event.note);
     this.updateNote(event.note);
   }
 

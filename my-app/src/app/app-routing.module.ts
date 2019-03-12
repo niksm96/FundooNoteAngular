@@ -9,7 +9,6 @@ import { ArchivenoteComponent } from './archivenote/archivenote.component';
 import { TrashnoteComponent } from './trashnote/trashnote.component';
 import { ViewNotesComponent } from './view-notes/view-notes.component';
 import { LabelspecificnoteComponent } from './labelspecificnote/labelspecificnote.component';
-import { SearchnoteComponent } from './searchnote/searchnote.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -22,8 +21,7 @@ const routes: Routes = [
       { path: 'note', component: ViewNotesComponent },
       { path: 'archivenote', component: ArchivenoteComponent },
       { path: 'trashnote', component: TrashnoteComponent},
-      { path: 'labelspecificnote', component: LabelspecificnoteComponent},
-      { path: 'search', component:SearchnoteComponent}
+      { path: 'labelspecificnote', component: LabelspecificnoteComponent}
     ]
   },
   { path: 'forgotpassword', component: ForgotpasswordComponent },

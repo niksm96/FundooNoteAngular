@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SearchnoteComponent } from './searchnote.component';
+import { CollaboratorComponent } from './collaborator.component';
 
-describe('SearchnoteComponent', () => {
-  let component: SearchnoteComponent;
-  let fixture: ComponentFixture<SearchnoteComponent>;
+describe('CollaboratorComponent', () => {
+  let component: CollaboratorComponent;
+  let fixture: ComponentFixture<CollaboratorComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SearchnoteComponent ]
+      declarations: [ CollaboratorComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(SearchnoteComponent);
+    fixture = TestBed.createComponent(CollaboratorComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

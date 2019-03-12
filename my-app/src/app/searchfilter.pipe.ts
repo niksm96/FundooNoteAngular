@@ -13,7 +13,7 @@ export class SearchfilterPipe implements PipeTransform {
     }
     else {
       return notes.filter(({title}) => {
-        return title.includes(searchInput);
+        return title.toLowerCase().includes(searchInput);
       });
     }
   }

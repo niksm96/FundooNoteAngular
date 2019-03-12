@@ -3,6 +3,7 @@ import { NoteService } from '../core/service/note.service';
 import { MatSnackBar, MatDialog, MatChipInputEvent } from '@angular/material';
 import { UpdatenoteComponent } from '../updatenote/updatenote.component';
 import { Label } from '../core/models/Label';
+import { CollaboratorComponent } from '../collaborator/collaborator.component';
 
 
 @Component({
@@ -13,7 +14,7 @@ import { Label } from '../core/models/Label';
 export class FetchnoteComponent implements OnInit {
 
   public removable = true;
-  
+
   @Input() notes
 
   @Input() grid = false
@@ -54,7 +55,7 @@ export class FetchnoteComponent implements OnInit {
 
   public updateArchiveNote(key, note) {
     note.pinned = 0;
-    note.archive = key == 'archive'? 1 : 0;
+    note.archive = key == 'archive' ? 1 : 0;
     const data = { key, note };
     this.fetchEvent.emit(data);
     this.snackBar.open("Note archived", "OK", {
@@ -87,8 +88,18 @@ export class FetchnoteComponent implements OnInit {
       })
   }
 
-  addLabelToNote(data){
+  public addLabelToNote(data) {
     this.fetchEvent.emit(data);
+  }
 
+  public openCollaborator(): void {
+    const dialogRef = this.dialog.open(CollaboratorComponent, {
+      width: '650px',
+      height: '300px',
+      data: ''
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      console.log("Dialog closed!");
+    });
   }
 }

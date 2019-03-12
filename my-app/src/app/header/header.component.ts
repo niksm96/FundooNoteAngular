@@ -34,7 +34,6 @@ export class HeaderComponent implements OnInit {
 
   public searchBar(){
     this.helper.setSearchBar(this.searchInput);
-    this.router.navigate(['home/search']);
   }
 
   closeSearch(){

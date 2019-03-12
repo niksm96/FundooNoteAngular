@@ -6,13 +6,13 @@ import { Label } from './core/models/Label';
 })
 export class SearchnotePipe implements PipeTransform {
   
-  transform(labels:Label[] , searchValue: any): any {
+  transform(labels: Label[], searchValue: any): any {
     console.log(labels, searchValue);
     if (!searchValue) {
-      return null;
+      return labels;
     }
     else {
-      return labels.filter(({labelName}) => {
+      return labels.filter(({ labelName }) => {
         return labelName.includes(searchValue);
       });
     }
