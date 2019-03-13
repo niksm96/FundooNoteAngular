@@ -1,10 +1,16 @@
 <app-note></app-note>
 
 <div fxLayout="column">
+  <span>
+    <font>Pinned</font>
+  </span>
   <app-fetchnote [notes]="notes | notefilter: 'pinned'" [grid]="grid" (fetchEvent)="refresh($event)"></app-fetchnote>
 </div>
 
 
 <div fxLayout="column">
-  <app-fetchnote [notes]="notes | notefilter"  [grid]="grid" (fetchEvent)="refresh($event)"></app-fetchnote>
+  <span>
+    <font>Others</font>
+  </span>
+  <app-fetchnote [notes]="notes | notefilter" [grid]="grid" (fetchEvent)="refresh($event)"></app-fetchnote>
 </div>

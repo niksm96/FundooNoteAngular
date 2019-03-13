@@ -1,37 +1,41 @@
 import { Component, OnInit } from '@angular/core';
-import { Note } from '../core/models/Note';
+import { KeepHelperService } from '../core/service/keep-helper.service';
 import { NoteService } from '../core/service/note.service';
 import { MatSnackBar } from '@angular/material';
-import { Label } from '../core/models/Label';
-import { KeepHelperService } from '../core/service/keep-helper.service';
+import { Note } from '../core/models/Note';
 
 @Component({
-  selector: 'app-view-notes',
-  templateUrl: './view-notes.component.html',
-  styleUrls: ['./view-notes.component.scss']
+  selector: 'app-search',
+  templateUrl: './search.component.html',
+  styleUrls: ['./search.component.css']
 })
-export class ViewNotesComponent implements OnInit{
+export class SearchComponent implements OnInit {
 
   public notes: Note[] = [];
 
-  public labels:Label[] = [];
-
   public grid = false;
+
+  public searchInput = '';
 
   constructor(
     private noteService: NoteService,
-    private snackBar : MatSnackBar,
-    private helper: KeepHelperService,
+    private snackBar: MatSnackBar,
+    private helper: KeepHelperService
   ) { }
 
   ngOnInit() {
     this.getNotes();
-    this.helper.getTheme().subscribe((res) => {
-      this.grid = res;
-    });
+    this.helper.getTheme().subscribe((grid) => {
+      this.grid = grid;
+    })
+    this.helper.getSearch().subscribe((searchInput) => {
+      this.searchInput = searchInput;
+    })
+
   }
-  
+
   public refresh(event) {
+    console.log(event.note);
     this.updateNote(event.note);
   }
 
@@ -53,4 +57,5 @@ export class ViewNotesComponent implements OnInit{
       console.log(this.notes);
     });
   }
+
 }

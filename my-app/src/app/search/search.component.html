@@ -1,0 +1,10 @@
+<div>
+    <div fxLayout="column" *ngIf="searchInput==''">
+       <span>
+         No Matches found!
+       </span>
+      </div>
+  <div fxLayout="column" *ngIf="searchInput!=''">
+    <app-fetchnote [notes]="notes | searchfilter:searchInput" [grid]="grid" (fetchEvent)="refresh($event)"></app-fetchnote>
+  </div>
+</div>

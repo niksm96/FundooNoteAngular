@@ -32,8 +32,9 @@ export class HeaderComponent implements OnInit {
     this.helper.setTheme(this.enable);
   }
 
-  public searchBar(){
-    this.helper.setSearchBar(this.searchInput);
+  public search(){
+    this.helper.setSearch(this.searchInput);
+    this.router.navigate(['home/search'])
   }
 
   closeSearch(){

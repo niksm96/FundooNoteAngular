@@ -21,8 +21,12 @@ export class CollaboratorComponent implements OnInit {
   ngOnInit() {
     this.userService.userDetails().subscribe(user=>{
       this.user = user;
-      console.log('user-->',user);
     })
+  }
+
+  public saveCollaboration(collaboratedUser){
+    console.log(collaboratedUser);
+    this.dialogRef.close();
   }
 
 }

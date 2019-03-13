@@ -6,7 +6,7 @@
   :host {
     .gk {
     &-container {
-      margin: auto;
+      margin: 10px 20px;
     
     }
       &-grid-view {
@@ -23,7 +23,7 @@
         display: flex;
         flex-direction: column;
         flex-wrap: wrap;
-        justify-content: space-around;
+        justify-content: space-between;
         mat-card{
           width:500px;
           position: relative;

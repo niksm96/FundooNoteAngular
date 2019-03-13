@@ -3,7 +3,16 @@
   <mat-divider></mat-divider>
   <mat-list-item *ngIf="user!=null">
     <mat-icon mat-list-icon>account_circle</mat-icon>
-    <h4 mat-line>{{user.name}}  (Owner)</h4>
+    <h4 mat-line>{{user.name}} (Owner)</h4>
     <p mat-line> {{user.emailId}} </p>
   </mat-list-item>
+  <mat-list-item>
+      <mat-icon mat-list-icon>person_add</mat-icon>
+      <input matInput placeholder="Person or email to share with" [(ngModel)]="collaboratedUser">
+  </mat-list-item>
 </mat-list>
+<mat-divider></mat-divider>
+<div>
+  <button mat-button>Cancel</button>
+  <button mat-button (click)="saveCollaboration(collaboratedUser)">Save</button>
+</div>

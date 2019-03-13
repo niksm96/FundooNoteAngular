@@ -11,7 +11,7 @@
       </span>
       <div class="slinput" ng-init="">
         <i class="fa fa-search left-icon"></i>
-        <input matInput type="search" placeholder="Search here" [(ngModel)]="searchInput" (click)=searchBar()>
+        <input matInput type="search" placeholder="Search here" [(ngModel)]="searchInput" (click)=search()>
         <button mat-button *ngIf="searchInput.length" (click)="closeSearch()">
           <mat-icon>close</mat-icon>
         </button>

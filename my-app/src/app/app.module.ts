@@ -30,6 +30,7 @@ import { SearchnotePipe } from './searchnote.pipe';
 import { AddLabelToNoteComponent } from './add-label-to-note/add-label-to-note.component';
 import { SearchfilterPipe } from './searchfilter.pipe';
 import { CollaboratorComponent } from './collaborator/collaborator.component';
+import { SearchComponent } from './search/search.component';
 
 @NgModule({
   declarations: [
@@ -54,7 +55,8 @@ import { CollaboratorComponent } from './collaborator/collaborator.component';
     SearchnotePipe,
     AddLabelToNoteComponent,
     SearchfilterPipe,
-    CollaboratorComponent
+    CollaboratorComponent,
+    SearchComponent
   ],
   imports: [
     BrowserModule,

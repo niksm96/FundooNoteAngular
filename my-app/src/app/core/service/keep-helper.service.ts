@@ -7,7 +7,7 @@ import { Subject } from 'rxjs';
 export class KeepHelperService {
   public theme$: Subject<any> = new Subject();
 
-  public searchBar$ : Subject<any> = new Subject();
+  public search$ : Subject<any> = new Subject();
   
   constructor() { }
 
@@ -19,11 +19,11 @@ export class KeepHelperService {
     return this.theme$;
   }
 
-  public setSearchBar(searchMain: string){
-    this.searchBar$.next(searchMain);
+  public setSearch(searchMain: string){
+    this.search$.next(searchMain);
   }
 
-  public getSearchBar(){
-    return this.searchBar$;
+  public getSearch(){
+    return this.search$;
   }
 }
