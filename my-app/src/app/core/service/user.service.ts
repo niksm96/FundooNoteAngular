@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttputilService } from './httputil.service';
 import { environment } from 'src/environments/environment';
-import { Router } from '@angular/router';
-import { HttpHeaders } from '@angular/common/http';
+import { HttpHeaders, HttpEvent, HttpRequest, HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -19,8 +18,10 @@ export class UserService {
     })
   };
 
-  constructor(private httpUtil: HttputilService,
-    private router: Router, ) { }
+  constructor(
+    private httpUtil: HttputilService,
+    private http: HttpClient
+    ) { }
 
   login(user) {
     return this.httpUtil.postService(environment.base_url + 'login', user);
@@ -30,16 +31,30 @@ export class UserService {
     return this.httpUtil.postService(environment.base_url + 'registeruser', user);
   }
 
-  forgotPassword(user){
-    return this.httpUtil.postService(environment.base_url+'forgotpassword',user);
+  forgotPassword(user) {
+    return this.httpUtil.postService(environment.base_url + 'forgotpassword', user);
   }
 
-  resetPassword(user,id){
-    return this.httpUtil.putService(environment.base_url+'resetpassword/'+id,user,id);
+  resetPassword(user, id) {
+    return this.httpUtil.putService(environment.base_url + 'resetpassword/' + id, user, id);
   }
 
-  userDetails():Observable<any>{
-    return this.httpUtil.getService(environment.base_url+'userdetails',this.httpheaders);
+  userDetails(): Observable<any> {
+    return this.httpUtil.getService(environment.base_url + 'userdetails', this.httpheaders);
   }
 
+  uploadImage(file: File): Observable<HttpEvent<{}>> {
+    const formdata: FormData = new FormData();
+    formdata.append('file', file);
+    const request = new HttpRequest('POST', environment.base_url + 'uploadfile/'+this.token, formdata, {
+      reportProgress: true,
+      responseType: 'text'
+    }
+    );
+    return this.http.request(request);
+  }
+
+  deleteImage(){
+    return this.httpUtil.deleteService(environment.base_url + 'deleteImage', this.httpheaders)
+  }
 }

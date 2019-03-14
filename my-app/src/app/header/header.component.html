@@ -33,7 +33,10 @@
           <span>Settings</span>
         </button>
       </mat-menu>
-      <button mat-button [matMenuTriggerFor]="user" class="end">
+      <button mat-button *ngIf="imageData.imageSrc!=null" [matMenuTriggerFor]="user" class="end">
+        <img class="image" [src]="imageData.imageSrc" height="40%" width="40%">
+      </button>
+      <button mat-button *ngIf="imageData.imageSrc==null" [matMenuTriggerFor]="user" class="end">
         <mat-icon>account_circle</mat-icon>
       </button>
       <mat-menu #user="matMenu">
@@ -42,6 +45,10 @@
           <a mat-button routerLink="/login">
             <span>Logout</span>
           </a>
+        </button>
+        <button mat-menu-item (click)=openDialogImage()>
+          <mat-icon>portrait</mat-icon>
+          <span>Upload Image</span>
         </button>
       </mat-menu>
     </mat-toolbar-row>

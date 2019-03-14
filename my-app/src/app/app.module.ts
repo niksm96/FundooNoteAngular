@@ -31,6 +31,7 @@ import { AddLabelToNoteComponent } from './add-label-to-note/add-label-to-note.c
 import { SearchfilterPipe } from './searchfilter.pipe';
 import { CollaboratorComponent } from './collaborator/collaborator.component';
 import { SearchComponent } from './search/search.component';
+import { ImageComponent } from './image/image.component';
 
 @NgModule({
   declarations: [
@@ -56,7 +57,8 @@ import { SearchComponent } from './search/search.component';
     AddLabelToNoteComponent,
     SearchfilterPipe,
     CollaboratorComponent,
-    SearchComponent
+    SearchComponent,
+    ImageComponent
   ],
   imports: [
     BrowserModule,
@@ -74,7 +76,8 @@ import { SearchComponent } from './search/search.component';
     UpdatenoteComponent , 
     TrashdialogComponent,
     EditlabelComponent,
-    CollaboratorComponent   
+    CollaboratorComponent,
+    ImageComponent   
   ],
   providers: [],
   bootstrap: [AppComponent]

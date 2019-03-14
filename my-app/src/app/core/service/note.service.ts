@@ -66,5 +66,4 @@ export class NoteService {
   addLabelToNote(noteId, label) {
     return this.httpUtil.putServiceOnlyHeader(environment.note_url + 'addlabeltonote/'+noteId,label)
   }
-
 }
