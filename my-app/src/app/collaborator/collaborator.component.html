@@ -2,17 +2,27 @@
   <h1 mat-subheader>Collaborators</h1>
   <mat-divider></mat-divider>
   <mat-list-item *ngIf="user!=null">
-    <mat-icon mat-list-icon>account_circle</mat-icon>
+    <mat-icon mat-list-icon *ngIf="imageData.imageSrc!=null">
+      <img class="image" [src]="imageData.imageSrc">
+    </mat-icon>
+    <mat-icon mat-list-icon *ngIf="imageData.imageSrc==null">account_circle</mat-icon>
     <h4 mat-line>{{user.name}} (Owner)</h4>
     <p mat-line> {{user.emailId}} </p>
   </mat-list-item>
   <mat-list-item>
-      <mat-icon mat-list-icon>person_add</mat-icon>
-      <input matInput placeholder="Person or email to share with" [(ngModel)]="collaboratedUser">
+    <mat-icon mat-list-icon>person_add</mat-icon>
+    <input matInput placeholder="Enter email to share with" [(ngModel)]="collaboratedUser">
+    <!-- <input type="text" placeholder="Enter email to share with" matInput [(ngModel)]="collaboratedUser">
+    <mat-option *ngFor="let existingUser of users | searchuser:collaboratedUser" [value]="existingUser">
+      {{existingUser.emailId}}
+    </mat-option> --> -->
+    <button mat-button (click)=saveCollaboration(collaboratedUser)>
+      <mat-icon>done</mat-icon>
+    </button>
   </mat-list-item>
 </mat-list>
 <mat-divider></mat-divider>
 <div>
-  <button mat-button>Cancel</button>
+  <button mat-button (click)="close()">Cancel</button>
   <button mat-button (click)="saveCollaboration(collaboratedUser)">Save</button>
 </div>

@@ -57,4 +57,8 @@ export class UserService {
   deleteImage(){
     return this.httpUtil.deleteService(environment.base_url + 'deleteImage', this.httpheaders)
   }
+
+  retieveListOfUsers(emailId):Observable<any>{
+    return this.httpUtil.getServiceWithoutHeader(environment.base_url+'retrieveusers/'+emailId);
+  }
 }

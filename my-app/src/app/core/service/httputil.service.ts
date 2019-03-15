@@ -31,4 +31,8 @@ export class HttputilService {
   putServiceOnlyHeader(url,header){
     return this.http.put<any>(url,header,{observe : 'response'});
   }
+
+  getServiceWithoutHeader(url){
+    return this.http.get<any>(url);
+  }
 }

@@ -33,10 +33,10 @@
           <span>Settings</span>
         </button>
       </mat-menu>
-      <button mat-button *ngIf="imageData.imageSrc!=null" [matMenuTriggerFor]="user" class="end">
-        <img class="image" [src]="imageData.imageSrc" height="40%" width="40%">
+      <button mat-icon-button *ngIf="imageData.imageSrc!=null" [matMenuTriggerFor]="user" class="end">
+        <img class="image" [src]="imageData.imageSrc" > 
       </button>
-      <button mat-button *ngIf="imageData.imageSrc==null" [matMenuTriggerFor]="user" class="end">
+      <button mat-icon-button *ngIf="imageData.imageSrc==null" [matMenuTriggerFor]="user" class="end">
         <mat-icon>account_circle</mat-icon>
       </button>
       <mat-menu #user="matMenu">

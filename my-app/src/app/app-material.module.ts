@@ -6,7 +6,7 @@ import {
   MatInputModule, MatCardModule, MatMenuModule, MatToolbarModule, MatSidenavModule,
   MatDividerModule, MatListModule, MatExpansionModule, MatSnackBarModule, 
   MatDatepickerModule, MAT_NATIVE_DATE_FORMATS, MAT_DATE_FORMATS, NativeDateModule, 
-  MatDialogModule,MatChipsModule, MatCheckboxModule
+  MatDialogModule,MatChipsModule, MatCheckboxModule, MatAutocompleteModule
 } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatIconModule } from '@angular/material/icon';
@@ -38,7 +38,8 @@ import { HttpClientModule } from '@angular/common/http';
     NativeDateModule,
     MatDialogModule,
     MatChipsModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatAutocompleteModule
   ],
   exports: [
     FormsModule,
@@ -62,7 +63,8 @@ import { HttpClientModule } from '@angular/common/http';
     NativeDateModule,
     MatDialogModule,
     MatChipsModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatAutocompleteModule
   ],
    providers: [
     {provide: MAT_DATE_FORMATS, useValue:MAT_NATIVE_DATE_FORMATS},

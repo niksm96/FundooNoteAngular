@@ -92,11 +92,11 @@ export class FetchnoteComponent implements OnInit {
     this.fetchEvent.emit(data);
   }
 
-  public openCollaborator(): void {
+  public openCollaborator(note): void {
     const dialogRef = this.dialog.open(CollaboratorComponent, {
       width: '650px',
       height: '300px',
-      data: ''
+      data: note
     });
     dialogRef.afterClosed().subscribe(result => {
       console.log("Dialog closed!");
