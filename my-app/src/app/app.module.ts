@@ -32,7 +32,8 @@ import { SearchfilterPipe } from './searchfilter.pipe';
 import { CollaboratorComponent } from './collaborator/collaborator.component';
 import { SearchComponent } from './search/search.component';
 import { ImageComponent } from './image/image.component';
-import { SearchuserPipe } from './searchuser.pipe';
+import { UserfilterPipe } from './userfilter.pipe';
+import { ColorComponent } from './color/color.component';
 
 @NgModule({
   declarations: [
@@ -60,7 +61,8 @@ import { SearchuserPipe } from './searchuser.pipe';
     CollaboratorComponent,
     SearchComponent,
     ImageComponent,
-    SearchuserPipe
+    UserfilterPipe,
+    ColorComponent
   ],
   imports: [
     BrowserModule,

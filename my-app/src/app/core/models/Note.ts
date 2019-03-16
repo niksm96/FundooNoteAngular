@@ -7,4 +7,5 @@ export interface Note {
     trashed:boolean;
     pinned:boolean;
     listOfLabels : Label[];
+    color : string;
 }

@@ -11,12 +11,19 @@
   </mat-list-item>
   <mat-list-item>
     <mat-icon mat-list-icon>person_add</mat-icon>
-    <input matInput placeholder="Enter email to share with" [(ngModel)]="collaboratedUser">
-    <!-- <input type="text" placeholder="Enter email to share with" matInput [(ngModel)]="collaboratedUser">
-    <mat-option *ngFor="let existingUser of users | searchuser:collaboratedUser" [value]="existingUser">
-      {{existingUser.emailId}}
-    </mat-option> --> -->
-    <button mat-button (click)=saveCollaboration(collaboratedUser)>
+    <!-- <input matInput placeholder="Enter email to share with" [(ngModel)]="collaboratedUser"> -->
+    <form class="example-form">
+      <mat-form-field class="example-full-width">
+        <input type="text" placeholder="Enter email here" aria-label="Number" matInput [formControl]="myControl"
+          [matAutocomplete]="auto">
+        <mat-autocomplete #auto="matAutocomplete">
+          <mat-option *ngFor="let user of users | userfilter:myControl.value" [value]="user.emailId">
+            {{user.emailId}}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+    </form>
+    <button mat-button (click)=saveCollaboration()>
       <mat-icon>done</mat-icon>
     </button>
   </mat-list-item>

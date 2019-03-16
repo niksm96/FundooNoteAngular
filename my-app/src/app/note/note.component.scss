@@ -1,6 +1,9 @@
 .mat-toolbar {
   
-    padding: 100px;}
+    padding: 100px;
+    display: flex;
+    flex-direction: row;
+}
   
     .noBorderAndBackground{
      

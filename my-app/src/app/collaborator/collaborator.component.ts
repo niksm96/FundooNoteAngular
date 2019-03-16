@@ -4,10 +4,6 @@ import { UserService } from '../core/service/user.service';
 import { User } from '../core/models/User';
 import { DomSanitizer } from '@angular/platform-browser';
 import { FormControl } from '@angular/forms';
-import { Observable } from 'rxjs';
-import { map, startWith } from 'rxjs/operators';
-import { SearchuserPipe } from '../searchuser.pipe';
-import { Note } from '../core/models/Note';
 
 interface ImageData {
   imageSrc: any;
@@ -17,22 +13,21 @@ interface ImageData {
   selector: 'app-collaborator',
   templateUrl: './collaborator.component.html',
   styleUrls: ['./collaborator.component.scss'],
-  providers: [SearchuserPipe]
 })
 export class CollaboratorComponent implements OnInit {
 
   user: any;
 
-  users: User[];
+  users: User[] = [];
 
   public imageData = <ImageData>{};
 
-  public searchInput = '';
+  public myControl = new FormControl();
 
 
   constructor(
     public dialogRef: MatDialogRef<CollaboratorComponent>,
-    @Inject(MAT_DIALOG_DATA) public note:Note,
+    @Inject(MAT_DIALOG_DATA) public note,
     private userService: UserService,
     private sanitizer: DomSanitizer,
     private snackBar: MatSnackBar
@@ -43,13 +38,13 @@ export class CollaboratorComponent implements OnInit {
       this.user = user;
     })
     this.getImage();
-    // this.getUsers();
+    this.getUsers();
+    console.log(this.users);
 
   }
 
-  public saveCollaboration(collaboratedUser) {
-    console.log(collaboratedUser);
-    this.userService.retieveListOfUsers(collaboratedUser).subscribe((user) => {
+  public saveCollaboration() {
+    this.userService.retieveListOfUsers().subscribe((user) => {
       console.log(user);
       console.log(this.note);
       this.snackBar.open("User email-id verified", "OK", {
@@ -85,10 +80,10 @@ export class CollaboratorComponent implements OnInit {
     );
   }
 
-  // private getUser(){
-  //   this.userService.retieveListOfUsers().subscribe((response)=>{
-  //     this.users = response;
-  //   })
-  // }
+  private getUsers() {
+    this.userService.retieveListOfUsers().subscribe(({ body }) => {
+      this.users = body;
+    })
+  }
 
 }

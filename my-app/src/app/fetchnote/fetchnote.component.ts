@@ -2,7 +2,6 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { NoteService } from '../core/service/note.service';
 import { MatSnackBar, MatDialog, MatChipInputEvent } from '@angular/material';
 import { UpdatenoteComponent } from '../updatenote/updatenote.component';
-import { Label } from '../core/models/Label';
 import { CollaboratorComponent } from '../collaborator/collaborator.component';
 
 
@@ -20,6 +19,8 @@ export class FetchnoteComponent implements OnInit {
   @Input() grid = false
 
   @Output() fetchEvent = new EventEmitter();
+
+  // public colors = ['#8A2BE2','#4B0082','#0000FF',	'#FF0000','#FFFF00','	#008000',	'#FFA500','	#FFFFFF']
 
   constructor(
     private noteService: NoteService,
@@ -101,5 +102,9 @@ export class FetchnoteComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       console.log("Dialog closed!");
     });
+  }
+
+  public updateColor(data){
+    this.fetchEvent.emit(data);
   }
 }

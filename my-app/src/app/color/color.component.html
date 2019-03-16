@@ -1,0 +1,10 @@
+<button mat-icon-button [matMenuTriggerFor]="menu" matTooltip="Change color" title="Change Color">
+  <mat-icon>palette</mat-icon>
+  <mat-menu #menu="matMenu">
+    <ul class="color-palet">
+      <li *ngFor="let color of colors">
+        <div class="color-palet-circle" (click)="changeColor(color)" [style.background-color]="color"></div>
+      </li>
+    </ul>
+  </mat-menu>
+</button>

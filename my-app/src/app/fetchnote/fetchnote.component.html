@@ -1,6 +1,6 @@
-<div class="gk" [ngClass]="grid ? 'gk-grid-view': 'gk-list-view'"  fxLayoutAlign="space-around center">
+<div class="gk" [ngClass]="grid ? 'gk-grid-view': 'gk-list-view'" fxLayoutAlign="space-around center">
   <div *ngFor="let note of notes" class=gk-container>
-    <mat-card>
+    <mat-card [style.background-color]="note.color">
       <mat-card-header>
         <mat-card-title (click)=openDialog(note)>{{note.title}}</mat-card-title>
         <button *ngIf="!note.pinned" mat-icon-button matTooltip="Pin" title="Pin" class="end"
@@ -31,9 +31,17 @@
           <button mat-icon-button matTooltip="Collaborator" title="Collaborator" (click)=openCollaborator(note)>
             <mat-icon>person_add</mat-icon>
           </button>
-          <button mat-icon-button matTooltip="Change color" title="Change Color">
+          <!-- <button mat-icon-button [matMenuTriggerFor]="menu" matTooltip="Change color" title="Change Color">
             <mat-icon>palette</mat-icon>
-          </button>
+            <mat-menu #menu="matMenu">
+              <ul class="color-palet">
+                <li *ngFor="let color of colors">
+                  <div class="color-palet-circle" (click)="changeColor(color)" [style.background-color]="color"></div>
+                </li>
+              </ul>
+            </mat-menu>
+          </button> -->
+          <app-color [particularNote]="note" (colorEvent)="updateColor($event)"></app-color>
           <button mat-icon-button matTooltip="Add image" title="Add image">
             <mat-icon>image</mat-icon>
           </button>

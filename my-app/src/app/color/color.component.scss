@@ -1,0 +1,16 @@
+.color-palet {
+    display: flex;
+    list-style: none;
+    width: 184px;
+    flex-wrap: wrap;
+    margin: 0;
+    padding: 5px;
+        &-circle {
+            width: 35px;
+            height: 35px;
+            border-radius: 25px;
+        }
+        li {
+            padding: 5px;
+        }
+    }
