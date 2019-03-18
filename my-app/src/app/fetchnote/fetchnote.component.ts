@@ -100,6 +100,8 @@ export class FetchnoteComponent implements OnInit {
       data: note
     });
     dialogRef.afterClosed().subscribe(result => {
+      const data = { note };
+      this.fetchEvent.emit(data);
       console.log("Dialog closed!");
     });
   }

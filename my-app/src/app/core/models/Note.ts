@@ -1,4 +1,5 @@
 import { Label } from './Label';
+import { Collaborator } from './Collaborator';
 
 export interface Note {
     title: string;
@@ -8,4 +9,5 @@ export interface Note {
     pinned:boolean;
     listOfLabels : Label[];
     color : string;
+    collaboratedUsers:Collaborator[];
 }

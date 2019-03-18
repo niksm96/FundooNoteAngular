@@ -9,6 +9,11 @@
     <h4 mat-line>{{user.name}} (Owner)</h4>
     <p mat-line> {{user.emailId}} </p>
   </mat-list-item>
+  <mat-list-item *ngFor="let collabedUser of collaboratedUsers">
+    <mat-icon mat-list-icon (click)="removeCollaborator(collabedUser)">close</mat-icon>
+    <h4 mat-line>{{collabedUser.name}}</h4>
+    <p mat-line> {{collabedUser.emailId}} </p>
+  </mat-list-item>
   <mat-list-item>
     <mat-icon mat-list-icon>person_add</mat-icon>
     <!-- <input matInput placeholder="Enter email to share with" [(ngModel)]="collaboratedUser"> -->
@@ -23,7 +28,7 @@
         </mat-autocomplete>
       </mat-form-field>
     </form>
-    <button mat-button (click)=saveCollaboration()>
+    <button mat-button (click)=saveCollaboration(myControl.value)>
       <mat-icon>done</mat-icon>
     </button>
   </mat-list-item>

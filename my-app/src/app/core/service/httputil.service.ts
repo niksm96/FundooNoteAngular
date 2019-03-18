@@ -35,4 +35,13 @@ export class HttputilService {
   getServiceWithoutHeader(url){
     return this.http.get<any>(url,{observe : 'response'});
   }
+
+  postServiceWithUrl(url){
+    return this.http.post<any>(url,{observe : 'response'});
+  }
+
+
+  deleteServiceWithUrl(url){
+    return this.http.delete<any>(url);
+  }
 }

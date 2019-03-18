@@ -61,4 +61,13 @@ export class UserService {
   retieveListOfUsers():Observable<any>{
     return this.httpUtil.getServiceWithoutHeader(environment.base_url+'retrieveusers');
   }
+
+  verifyUser(emailId):Observable<any> {
+    return this.httpUtil.getServiceWithoutHeader(environment.base_url + 'verifyUser/'+emailId);
+  }
+
+  getUserById(userId):Observable<any>{
+    return this.httpUtil.getServiceWithoutHeader(environment.base_url+'getUserById/'+userId);
+  }
+
 }
