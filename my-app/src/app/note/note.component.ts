@@ -1,8 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { NoteService } from '../core/service/note.service';
 import { MatSnackBar } from '@angular/material';
-import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-note',
@@ -11,22 +10,23 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class NoteComponent implements OnInit {
 
-  
+  @Output() createNoteEvent = new EventEmitter();
+
   public createNoteForm: FormGroup
-  
+
 
   constructor(
     private noteService: NoteService,
     private snackBar: MatSnackBar,
     private formBuilder: FormBuilder
-    ) { }
+  ) { }
 
   ngOnInit() {
     this.createNoteForm = this.formBuilder.group({
       title: [''],
       description: ['', Validators.required]
     });
-   
+
   }
 
   public onSubmit(note) {
@@ -37,6 +37,7 @@ export class NoteComponent implements OnInit {
       return;
     }
     this.noteService.createNote(note).subscribe(response => {
+      this.createNoteEvent.emit();
       this.snackBar.open("Note created successfully", "OK", {
         duration: 3000,
       });

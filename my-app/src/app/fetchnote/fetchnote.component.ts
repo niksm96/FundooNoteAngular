@@ -20,6 +20,9 @@ export class FetchnoteComponent implements OnInit {
 
   @Output() fetchEvent = new EventEmitter();
 
+  // colors = ['CYAN', 'GREEN', 'YELLOW'];
+  // myColor = '';
+
   // public colors = ['#8A2BE2','#4B0082','#0000FF',	'#FF0000','#FFFF00','	#008000',	'#FFA500','	#FFFFFF']
 
   constructor(

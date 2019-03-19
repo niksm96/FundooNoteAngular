@@ -86,4 +86,9 @@ export class HeaderComponent implements OnInit {
     }
     );
   }
+
+  public logout(){
+    localStorage.removeItem('token');
+    this.router.navigate(['/login']);
+  }
 }

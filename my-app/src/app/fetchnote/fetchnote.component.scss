@@ -18,6 +18,7 @@
         mat-card{
           width:300px;
           position: relative;
+          box-shadow: 0 14px 28px rgba(110, 108, 108, 0.22), 0 10px 10px rgba(110, 108, 108, 0.22);
         }
       }
       &-list-view {
@@ -25,13 +26,48 @@
         flex-direction: column;
         flex-wrap: wrap;
         justify-content: space-between;
-       
         mat-card{
           width:500px;
           position: relative;
           margin: auto;
-          
+          box-shadow: 0 14px 28px rgba(110, 108, 108, 0.22), 0 10px 10px rgba(110, 108, 108, 0.22);
         }
       }
     }
   }
+
+//   @mixin display($value) {
+//     .header-icon, .container-footer-buttons  {
+//       display: $value;
+//      }
+//  }
+ 
+ 
+//  .flex-box {
+//    display: flex;
+//      justify-content: space-between;
+//  }
+//  .container {
+//    @include display(none);
+//      padding: 10px;
+//    color: black;
+//    background-color: skyblue;
+//    &-header {
+//     @extend .flex-box;
+//     p {
+//       background-color: red;
+//       padding:  0 5px;
+//       border-radius: 10px;
+//     }
+//    }
+//    &-footer {
+//      height: 20px;
+//      &-buttons {
+//      @extend .flex-box;
+//      }
+//    }
+//    &.has-hover  {
+//      @include display(flex);
+//      background-color: lightgrey;
+//    }
+//  }

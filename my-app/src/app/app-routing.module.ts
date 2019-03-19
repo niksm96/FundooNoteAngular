@@ -10,6 +10,8 @@ import { TrashnoteComponent } from './trashnote/trashnote.component';
 import { ViewNotesComponent } from './view-notes/view-notes.component';
 import { LabelspecificnoteComponent } from './labelspecificnote/labelspecificnote.component';
 import { SearchComponent } from './search/search.component';
+import { CanActivate } from '@angular/router/src/utils/preactivation';
+import { AuthGuard } from './auth.guard';
 
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -17,6 +19,7 @@ const routes: Routes = [
   { path: 'register', component: RegisterComponent },
   {
     path: 'home', component: HomeComponent,
+    canActivate:[AuthGuard],
     children: [
       { path: '', redirectTo: 'note', pathMatch: 'full' },
       { path: 'note', component: ViewNotesComponent },

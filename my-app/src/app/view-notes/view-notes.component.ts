@@ -47,7 +47,7 @@ export class ViewNotesComponent implements OnInit{
       })
   }
 
-  private getNotes() {
+  public getNotes() {
     this.noteService.retrieveNote().subscribe(notes => {
       this.notes = notes;
       console.log(this.notes);

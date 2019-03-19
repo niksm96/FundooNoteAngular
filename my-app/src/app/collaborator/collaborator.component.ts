@@ -46,7 +46,8 @@ export class CollaboratorComponent implements OnInit {
     this.userService.userDetails().subscribe(user => {
       this.user = user;
     })
-    this.getImage();
+    // this.getImage();
+    this.noteOwner();
     this.getUsers();
     this.getListOfCollaboratedUsers();
 
@@ -75,22 +76,28 @@ export class CollaboratorComponent implements OnInit {
     this.dialogRef.close();
   }
 
-  private getImage() {
-    this.userService.userDetails().subscribe((user) => {
-      this.user = user;
-      if (user.profilePicture != null) {
-        const url = `data:${this.user.contentType};base64,${this.user.profilePicture}`;
-        this.imageData = {
-          imageSrc: this.sanitizer.bypassSecurityTrustUrl(url)
-        }
-      } else {
-        this.imageData.imageSrc = null;
-      }
-    }, (error) => {
-      console.log(error);
-    }
-    );
+  private noteOwner(){
+    this.userService.getUserById( this.note.userId).subscribe(({body})=>{
+      this.user = body;
+    });
   }
+
+  // private getImage() {
+  //   this.userService.userDetails().subscribe((user) => {
+  //     this.user = user;
+  //     if (user.profilePicture != null) {
+  //       const url = `data:${this.user.contentType};base64,${this.user.profilePicture}`;
+  //       this.imageData = {
+  //         imageSrc: this.sanitizer.bypassSecurityTrustUrl(url)
+  //       }
+  //     } else {
+  //       this.imageData.imageSrc = null;
+  //     }
+  //   }, (error) => {
+  //     console.log(error);
+  //   }
+  //   );
+  // }
 
   private getUsers() {
     this.userService.retieveListOfUsers().subscribe(({ body }) => {

@@ -34,6 +34,7 @@ import { SearchComponent } from './search/search.component';
 import { ImageComponent } from './image/image.component';
 import { UserfilterPipe } from './userfilter.pipe';
 import { ColorComponent } from './color/color.component';
+import { DynamicHoverDirective } from './dynamic-hover.directive';
 
 @NgModule({
   declarations: [
@@ -62,7 +63,8 @@ import { ColorComponent } from './color/color.component';
     SearchComponent,
     ImageComponent,
     UserfilterPipe,
-    ColorComponent
+    ColorComponent,
+    DynamicHoverDirective
   ],
   imports: [
     BrowserModule,

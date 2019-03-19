@@ -41,10 +41,7 @@
       </button>
       <mat-menu #user="matMenu">
         <button mat-menu-item>
-          <mat-icon>logout</mat-icon>
-          <a mat-button routerLink="/login">
-            <span>Logout</span>
-          </a>
+          <mat-icon (click)="logout()">logout</mat-icon>
         </button>
         <button mat-menu-item (click)=openDialogImage()>
           <mat-icon>portrait</mat-icon>

@@ -1,5 +1,5 @@
 <div class="gk" [ngClass]="grid ? 'gk-grid-view': 'gk-list-view'">
-  <div fxFlex *ngFor="let note of notes | notefilter: 'trashed'" class="card-item">
+  <div fxFlex *ngFor="let note of notes | notefilter: 'trashed'" class=gk-container>
     <mat-card>
       <mat-card-header>
         <mat-card-title (click)=openDialog(note)>{{note.title}}</mat-card-title>
