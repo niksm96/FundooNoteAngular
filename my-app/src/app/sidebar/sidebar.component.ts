@@ -85,6 +85,10 @@ export class SidebarComponent implements OnInit {
     });
   }
 
+  public remainder(){
+    this.router.navigate(['home/remainder'])
+  }
+
   private getLabel(){
     this.labelService.retrieveLabel().subscribe(label => {
       this.labels = label;

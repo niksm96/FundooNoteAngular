@@ -56,6 +56,11 @@ export class CollaboratorComponent implements OnInit {
   public saveCollaboration(emailId) {
     this.userService.verifyUser(emailId).subscribe(({body}) => {
       const user=body;
+      if(user.id===this.note.userId)
+      {
+        this.snackBar.open("You cannont add owner", "error")
+        return;
+      }
       console.log(user.id);
       console.log(this.note);
       this.collaboratorService.addCollaborator(this.note.noteId,user.id).subscribe((response)=>{

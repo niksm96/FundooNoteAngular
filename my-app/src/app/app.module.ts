@@ -35,6 +35,7 @@ import { ImageComponent } from './image/image.component';
 import { UserfilterPipe } from './userfilter.pipe';
 import { ColorComponent } from './color/color.component';
 import { DynamicHoverDirective } from './dynamic-hover.directive';
+import { RemainderComponent } from './remainder/remainder.component';
 
 @NgModule({
   declarations: [
@@ -64,7 +65,8 @@ import { DynamicHoverDirective } from './dynamic-hover.directive';
     ImageComponent,
     UserfilterPipe,
     ColorComponent,
-    DynamicHoverDirective
+    DynamicHoverDirective,
+    RemainderComponent,
   ],
   imports: [
     BrowserModule,

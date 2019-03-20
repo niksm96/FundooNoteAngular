@@ -12,6 +12,7 @@ import { LabelspecificnoteComponent } from './labelspecificnote/labelspecificnot
 import { SearchComponent } from './search/search.component';
 import { CanActivate } from '@angular/router/src/utils/preactivation';
 import { AuthGuard } from './auth.guard';
+import { RemainderComponent } from './remainder/remainder.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -19,14 +20,15 @@ const routes: Routes = [
   { path: 'register', component: RegisterComponent },
   {
     path: 'home', component: HomeComponent,
-    canActivate:[AuthGuard],
+    canActivate: [AuthGuard],
     children: [
       { path: '', redirectTo: 'note', pathMatch: 'full' },
       { path: 'note', component: ViewNotesComponent },
       { path: 'archivenote', component: ArchivenoteComponent },
-      { path: 'trashnote', component: TrashnoteComponent},
-      { path: 'labelspecificnote', component: LabelspecificnoteComponent},
-      { path: 'search', component: SearchComponent}
+      { path: 'trashnote', component: TrashnoteComponent },
+      { path: 'labelspecificnote', component: LabelspecificnoteComponent },
+      { path: 'search', component: SearchComponent },
+      { path: 'remainder', component: RemainderComponent }
     ]
   },
   { path: 'forgotpassword', component: ForgotpasswordComponent },

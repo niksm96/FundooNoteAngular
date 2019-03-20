@@ -21,26 +21,32 @@
             {{label.labelName}}
             <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
           </mat-chip>
+          <!-- <mat-chip>
+            {{date.value}}
+            <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+          </mat-chip> -->
         </mat-chip-list>
       </mat-card-content>
       <mat-card-footer class="container-footer">
         <div class="container-footer-buttons">
-          <button mat-icon-button matTooltip="Remind me" title="Remind me">
+          <button mat-icon-button [matMenuTriggerFor]="menu" matTooltip="Remind me" title="Remind me">
             <mat-icon>add_alert</mat-icon>
           </button>
+          <mat-menu #menu="matMenu">
+            <!-- <mat-form-field>
+              <input matInput [matDatepicker]="dp" placeholder="Date" [formControl]="date">
+              <mat-datepicker-toggle matSuffix [for]="dp"></mat-datepicker-toggle>
+              <mat-datepicker #dp></mat-datepicker>
+            </mat-form-field> -->
+            <mat-form-field>
+              <input matInput [matDatepicker]="reminder" [value]="date.value" [(ngModel)]="note.reminder">
+              <mat-datepicker-toggle matSuffix [for]="reminder"></mat-datepicker-toggle>
+              <mat-datepicker #reminder></mat-datepicker>
+            </mat-form-field>
+          </mat-menu>
           <button mat-icon-button matTooltip="Collaborator" title="Collaborator" (click)=openCollaborator(note)>
             <mat-icon>person_add</mat-icon>
           </button>
-          <!-- <button mat-icon-button [matMenuTriggerFor]="menu" matTooltip="Change color" title="Change Color">
-            <mat-icon>palette</mat-icon>
-            <mat-menu #menu="matMenu">
-              <ul class="color-palet">
-                <li *ngFor="let color of colors">
-                  <div class="color-palet-circle" (click)="changeColor(color)" [style.background-color]="color"></div>
-                </li>
-              </ul>
-            </mat-menu>
-          </button> -->
           <app-color [particularNote]="note" (colorEvent)="updateColor($event)"></app-color>
           <button mat-icon-button matTooltip="Add image" title="Add image">
             <mat-icon>image</mat-icon>
@@ -62,7 +68,8 @@
               </button>
             </div>
             <div>
-              <app-add-label-to-note [note]=note (addLabelToNoteEvent)="addLabelToNote($event)"></app-add-label-to-note>
+              <app-add-label-to-note [note]=note (addLabelToNoteEvent)="addLabelToNote($event)">
+              </app-add-label-to-note>
             </div>
           </mat-menu>
           <button mat-icon-button matTooltip="undo">

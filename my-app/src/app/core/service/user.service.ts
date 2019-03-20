@@ -11,11 +11,11 @@ export class UserService {
 
 
   token = localStorage.getItem('token');
-  httpheaders = {
-    headers: new HttpHeaders({
+  public httpheaders() {
+    return {headers: new HttpHeaders({
       'Content-Type': 'application/json',
-      'token': this.token
-    })
+      'token': localStorage.getItem('token')
+    })}
   };
 
   constructor(
@@ -40,7 +40,7 @@ export class UserService {
   }
 
   userDetails(): Observable<any> {
-    return this.httpUtil.getService(environment.base_url + 'userdetails', this.httpheaders);
+    return this.httpUtil.getService(environment.base_url + 'userdetails', this.httpheaders());
   }
 
   uploadImage(file: File): Observable<HttpEvent<{}>> {
@@ -55,7 +55,7 @@ export class UserService {
   }
 
   deleteImage(){
-    return this.httpUtil.deleteService(environment.base_url + 'deleteImage', this.httpheaders)
+    return this.httpUtil.deleteService(environment.base_url + 'deleteImage', this.httpheaders())
   }
 
   retieveListOfUsers():Observable<any>{

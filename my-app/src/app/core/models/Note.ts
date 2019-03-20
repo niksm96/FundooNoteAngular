@@ -10,4 +10,5 @@ export interface Note {
     listOfLabels : Label[];
     color : string;
     collaboratedUsers:Collaborator[];
+    reminder:string;
 }

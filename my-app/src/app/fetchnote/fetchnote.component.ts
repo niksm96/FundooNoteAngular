@@ -1,29 +1,27 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { NoteService } from '../core/service/note.service';
-import { MatSnackBar, MatDialog, MatChipInputEvent } from '@angular/material';
+import { MatSnackBar, MatDialog} from '@angular/material';
 import { UpdatenoteComponent } from '../updatenote/updatenote.component';
 import { CollaboratorComponent } from '../collaborator/collaborator.component';
-
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-fetchnote',
   templateUrl: './fetchnote.component.html',
-  styleUrls: ['./fetchnote.component.scss']
+  styleUrls: ['./fetchnote.component.scss'],
 })
 export class FetchnoteComponent implements OnInit {
 
   public removable = true;
+
+  date = new FormControl(new Date());
+  serializedDate = new FormControl((new Date()).toISOString());
 
   @Input() notes
 
   @Input() grid = false
 
   @Output() fetchEvent = new EventEmitter();
-
-  // colors = ['CYAN', 'GREEN', 'YELLOW'];
-  // myColor = '';
-
-  // public colors = ['#8A2BE2','#4B0082','#0000FF',	'#FF0000','#FFFF00','	#008000',	'#FFA500','	#FFFFFF']
 
   constructor(
     private noteService: NoteService,
