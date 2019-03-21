@@ -35,6 +35,13 @@ export class NotefilterPipe implements PipeTransform {
         }
       });
     }
+    else if (valid === 'reminder') {
+      return notes.filter((item) => {
+        if (!item.trashed && item.reminder) {
+          return item;
+        }
+      });
+    }
     return null;
 
   }

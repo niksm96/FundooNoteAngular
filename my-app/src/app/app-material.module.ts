@@ -11,6 +11,7 @@ import {
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatIconModule } from '@angular/material/icon';
 import { HttpClientModule } from '@angular/common/http';
+import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
 
 
 @NgModule({
@@ -39,7 +40,9 @@ import { HttpClientModule } from '@angular/common/http';
     MatDialogModule,
     MatChipsModule,
     MatCheckboxModule,
-    MatAutocompleteModule
+    MatAutocompleteModule,
+    OwlDateTimeModule,
+    OwlNativeDateTimeModule
   ],
   exports: [
     FormsModule,
@@ -64,7 +67,9 @@ import { HttpClientModule } from '@angular/common/http';
     MatDialogModule,
     MatChipsModule,
     MatCheckboxModule,
-    MatAutocompleteModule
+    MatAutocompleteModule,
+    OwlDateTimeModule,
+    OwlNativeDateTimeModule
   ],
    providers: [
     {provide: MAT_DATE_FORMATS, useValue:MAT_NATIVE_DATE_FORMATS},

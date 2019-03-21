@@ -1,3 +1,4 @@
-<p>
-  remainder works!
-</p>
+<div fxLayout="column">
+  <app-fetchnote [notes]="notes | notefilter: 'reminder'" [grid]="grid" (fetchEvent)="refresh($event)"></app-fetchnote>
+</div>
+

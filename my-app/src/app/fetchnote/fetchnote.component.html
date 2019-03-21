@@ -21,6 +21,11 @@
             {{label.labelName}}
             <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
           </mat-chip>
+          <mat-chip *ngIf="note.reminder != null" [selectable]="selectable" [removable]="removable"
+            (removed)="removeReminder(note)">
+            {{note.reminder | date:'short'}}
+            <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+          </mat-chip>
           <!-- <mat-chip>
             {{date.value}}
             <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
@@ -33,16 +38,17 @@
             <mat-icon>add_alert</mat-icon>
           </button>
           <mat-menu #menu="matMenu">
+            <label>
+              Date Time:
+              <input [min]="min" [owlDateTimeTrigger]="dt5" [owlDateTime]="dt5" [(ngModel)]="selectedReminder">
+              <owl-date-time [pickerMode]="'dialog'" #dt5></owl-date-time>
+            </label>
+            <button mat-button (click)="updateReminder(note,selectedReminder)">Save</button>
             <!-- <mat-form-field>
-              <input matInput [matDatepicker]="dp" placeholder="Date" [formControl]="date">
-              <mat-datepicker-toggle matSuffix [for]="dp"></mat-datepicker-toggle>
-              <mat-datepicker #dp></mat-datepicker>
-            </mat-form-field> -->
-            <mat-form-field>
               <input matInput [matDatepicker]="reminder" [value]="date.value" [(ngModel)]="note.reminder">
               <mat-datepicker-toggle matSuffix [for]="reminder"></mat-datepicker-toggle>
               <mat-datepicker #reminder></mat-datepicker>
-            </mat-form-field>
+            </mat-form-field> -->
           </mat-menu>
           <button mat-icon-button matTooltip="Collaborator" title="Collaborator" (click)=openCollaborator(note)>
             <mat-icon>person_add</mat-icon>

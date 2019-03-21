@@ -15,6 +15,8 @@ export class FetchnoteComponent implements OnInit {
   public removable = true;
 
   date = new FormControl(new Date());
+  min=new Date();
+  selectedReminder =new Date();
   serializedDate = new FormControl((new Date()).toISOString());
 
   @Input() notes
@@ -110,4 +112,18 @@ export class FetchnoteComponent implements OnInit {
   public updateColor(data){
     this.fetchEvent.emit(data);
   }
+
+  public updateReminder(note,reminder){
+    note.reminder=reminder;
+    const data = {note};
+    this.fetchEvent.emit(data);
+  }
+
+  removeReminder(note){
+    note.reminder=null;
+    console.log(note.reminder)
+    const data = {note};
+    this.fetchEvent.emit(data);
+  }
+
 }
