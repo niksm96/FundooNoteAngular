@@ -14,10 +14,11 @@ export class FetchnoteComponent implements OnInit {
 
   public removable = true;
 
-  date = new FormControl(new Date());
   min=new Date();
+
   selectedReminder =new Date();
-  serializedDate = new FormControl((new Date()).toISOString());
+
+  @Input() message;
 
   @Input() notes
 

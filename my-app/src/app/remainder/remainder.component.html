@@ -1,4 +1,4 @@
 <div fxLayout="column">
-  <app-fetchnote [notes]="notes | notefilter: 'reminder'" [grid]="grid" (fetchEvent)="refresh($event)"></app-fetchnote>
+  <app-fetchnote [notes]="notes | notefilter: 'reminder'" [grid]="grid" [message]="'reminder'" (fetchEvent)="refresh($event)"></app-fetchnote>
 </div>
 

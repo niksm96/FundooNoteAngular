@@ -1,4 +1,26 @@
 <div class="gk" [ngClass]="grid ? 'gk-grid-view': 'gk-list-view'" fxLayoutAlign="space-around center">
+  <div *ngIf="notes.length === 0 && message==='archive'" class="empty">
+    <mat-icon class="searchicon">archive</mat-icon>
+    <div class="message">No notes in archive</div>
+  </div>
+  <div *ngIf="notes.length === 0 && message==='reminder'" class="empty">
+    <mat-icon class="searchicon">notifications_null</mat-icon>
+    <div class="message">No notes in reminder</div>
+  </div>
+  <div *ngIf="notes.length === 0 && message==='note'" class="empty">
+    <mat-icon class="searchicon">note</mat-icon>
+    <div class="message">Create new note</div>
+  </div>
+  <div *ngIf="notes.length > 0 && message==='note'">
+    <span><b>
+        <font size="2" face="times new roman">OTHER NOTES</font>
+    </b></span>
+  </div>
+  <div *ngIf="notes.length > 0 && message==='pinned'">
+    <span><b>
+      <font size="2" face="times new roman">PINNED</font>
+    </b></span>
+  </div>
   <div *ngFor="let note of notes" class=gk-container>
     <mat-card [style.background-color]="note.color">
       <mat-card-header class="container-header">
@@ -26,10 +48,6 @@
             {{note.reminder | date:'short'}}
             <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
           </mat-chip>
-          <!-- <mat-chip>
-            {{date.value}}
-            <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
-          </mat-chip> -->
         </mat-chip-list>
       </mat-card-content>
       <mat-card-footer class="container-footer">
@@ -44,11 +62,6 @@
               <owl-date-time [pickerMode]="'dialog'" #dt5></owl-date-time>
             </label>
             <button mat-button (click)="updateReminder(note,selectedReminder)">Save</button>
-            <!-- <mat-form-field>
-              <input matInput [matDatepicker]="reminder" [value]="date.value" [(ngModel)]="note.reminder">
-              <mat-datepicker-toggle matSuffix [for]="reminder"></mat-datepicker-toggle>
-              <mat-datepicker #reminder></mat-datepicker>
-            </mat-form-field> -->
           </mat-menu>
           <button mat-icon-button matTooltip="Collaborator" title="Collaborator" (click)=openCollaborator(note)>
             <mat-icon>person_add</mat-icon>

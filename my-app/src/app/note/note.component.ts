@@ -14,6 +14,11 @@ export class NoteComponent implements OnInit {
 
   public createNoteForm: FormGroup
 
+  min=new Date();
+
+  selectedReminder =new Date();
+
+
 
   constructor(
     private noteService: NoteService,
@@ -24,7 +29,8 @@ export class NoteComponent implements OnInit {
   ngOnInit() {
     this.createNoteForm = this.formBuilder.group({
       title: [''],
-      description: ['', Validators.required]
+      description: ['', Validators.required],
+      reminder:['']
     });
 
   }
@@ -37,16 +43,46 @@ export class NoteComponent implements OnInit {
       return;
     }
     this.noteService.createNote(note).subscribe(response => {
-      this.createNoteEvent.emit();
+      this.createNoteEvent.emit(true);
       this.snackBar.open("Note created successfully", "OK", {
         duration: 3000,
       });
     },
       (error) => {
+        console.log(error);
         this.snackBar.open("Note creation failed", "OK", {
           duration: 3000,
         });
       });
+  }
+
+  public updateArchiveNote(note) {
+    note.pinned = 0;
+    note.archive = 1;
+    this.onSubmit(note);
+    this.snackBar.open("Note archived", "OK", {
+      duration: 3000,
+    });
+  }
+
+  public updateColor(data){
+    this.onSubmit(data.note);
+  }
+
+  pinnedNote(note){
+    note.pinned = 1;
+    this.onSubmit(note);
+    this.snackBar.open("Note pinned", "OK", {
+      duration: 3000,
+    });
+  }
+
+  updateReminder(reminder,note){
+    note.reminder=reminder;
+    this.onSubmit(note);
+    this.snackBar.open("Note Reminder Set", "OK", {
+      duration: 3000,
+    });
   }
 
 }

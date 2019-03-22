@@ -10,17 +10,17 @@ import { KeepHelperService } from '../core/service/keep-helper.service';
   templateUrl: './view-notes.component.html',
   styleUrls: ['./view-notes.component.scss']
 })
-export class ViewNotesComponent implements OnInit{
+export class ViewNotesComponent implements OnInit {
 
   public notes: Note[] = [];
 
-  public labels:Label[] = [];
+  public labels: Label[] = [];
 
   public grid = false;
 
   constructor(
     private noteService: NoteService,
-    private snackBar : MatSnackBar,
+    private snackBar: MatSnackBar,
     private helper: KeepHelperService,
   ) { }
 
@@ -30,7 +30,13 @@ export class ViewNotesComponent implements OnInit{
       this.grid = res;
     });
   }
-  
+
+  public createRefresh(event) {
+    if (event) {
+      this.getNotes();
+    }
+  }
+
   public refresh(event) {
     this.updateNote(event.note);
   }

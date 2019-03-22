@@ -25,6 +25,9 @@
             <input #note class="noBorderAndBackground" formControlName="title" placeholder="Title"
               style="width: 500px;">
             &nbsp;
+            <button mat-icon-button matTooltip="Pin" title="Pin" class="end" (click)="pinnedNote(createNoteForm.value)">
+              <mat-icon>colorize</mat-icon>
+            </button>
           </mat-panel-description>
           <mat-panel-description>
             <input #note class="noBorderAndBackground" placeholder="Take a note.." formControlName="description"
@@ -32,29 +35,30 @@
           </mat-panel-description>
           <mat-panel-description>
             <div>
-              <button mat-icon-button matTooltip="Remind me" title="Remind me">
+              <button mat-icon-button [matMenuTriggerFor]="reminder" matTooltip="Remind me" title="Remind me">
                 <mat-icon>add_alert</mat-icon>
               </button>
+              <mat-menu #reminder="matMenu">
+                <label>
+                  Date Time:
+                  <input [min]="min" formControlName="reminder" [owlDateTimeTrigger]="dt5" [owlDateTime]="dt5">
+                  <owl-date-time [pickerMode]="'dialog'" #dt5></owl-date-time>
+                </label>
+                <button mat-button (click)="updateReminder(createNoteForm.value.reminder,createNoteForm.value)">Save</button>
+              </mat-menu>
               <button mat-icon-button matTooltip="Collaborator" title="Collaborator">
                 <mat-icon>person_add</mat-icon>
               </button>
-              <button mat-icon-button matTooltip="Change color" title="Change Color">
-                <mat-icon>palette</mat-icon>
-              </button>
+              <app-color [particularNote]="createNoteForm.value" (colorEvent)="updateColor($event)"></app-color>
               <button mat-icon-button matTooltip="Add image" title="Add image">
                 <mat-icon>image</mat-icon>
               </button>
-              <button mat-icon-button matTooltip="Archive" (click)="updateArchiveNote(note)">
+              <button mat-icon-button matTooltip="Archive" (click)="updateArchiveNote(createNoteForm.value)">
                 <mat-icon>archive</mat-icon>
               </button>
               <button mat-icon-button class="icon-button" id="more" [matMenuTriggerFor]="more">
                 <i id="accountcircle" class="material-icons">more_vert</i></button>
               <mat-menu #more="matMenu" class="morecard">
-                <div>
-                  <button mat-button (click)=moveToTrash(note)>
-                    <span>Delete Note</span>
-                  </button>
-                </div>
                 <div>
                   <button mat-button (click)=openCard()>
                     <span>Add Label</span>

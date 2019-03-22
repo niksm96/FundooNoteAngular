@@ -21,20 +21,30 @@
         {{label.labelName}}
         <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
       </mat-chip>
+      <mat-chip *ngIf="data.reminder != null" [selectable]="selectable" [removable]="removable"
+        (removed)="removeReminder(note)">
+        {{data.reminder | date:'short'}}
+        <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+      </mat-chip>
     </mat-chip-list>
   </div>
   <div>
     <br>
-    <button mat-icon-button matTooltip="Remind me">
+    <button mat-icon-button [matMenuTriggerFor]="menu" matTooltip="Remind me" title="Remind me">
       <mat-icon>add_alert</mat-icon>
     </button>
-    <button mat-icon-button matTooltip="Collaborator">
+    <mat-menu #menu="matMenu">
+      <label>
+        Date Time:
+        <input [min]="min" [owlDateTimeTrigger]="dt5" [owlDateTime]="dt5" [(ngModel)]="selectedReminder">
+        <owl-date-time [pickerMode]="'dialog'" #dt5></owl-date-time>
+      </label>
+      <button mat-button (click)="updateReminder(data,selectedReminder)">Save</button>
+    </mat-menu>
+    <button mat-icon-button matTooltip="Collaborator" title="Collaborator" (click)=openCollaborator(data)>
       <mat-icon>person_add</mat-icon>
     </button>
-    <!-- <button mat-icon-button matTooltip="Change color">
-    <mat-icon>palette</mat-icon>
-  </button> -->
-    <app-color [particularNote]="note" (colorEvent)="updateColor($event)"></app-color>
+    <app-color [particularNote]="data" (colorEvent)="updateColor($event)"></app-color>
     <button mat-icon-button matTooltip="Add image">
       <mat-icon>image</mat-icon>
     </button>

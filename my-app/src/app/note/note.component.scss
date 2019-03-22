@@ -1,12 +1,12 @@
 .mat-toolbar {
-  
+    margin-left: 141px;
     padding: 100px;
     display: flex;
     flex-direction: row;
+    margin-right: auto;
 }
   
-    .noBorderAndBackground{
-     
+.noBorderAndBackground{     
      text-align: left;
      height:50px;
      font-size:14pt;
@@ -14,3 +14,7 @@
      border: hidden;
      outline: none;
     }
+
+.end{
+    margin-left: auto;
+  }

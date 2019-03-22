@@ -1,7 +1,8 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA, MatSnackBar } from '@angular/material';
+import { MatDialogRef, MAT_DIALOG_DATA, MatSnackBar, MatDialog } from '@angular/material';
 import { NoteService } from '../core/service/note.service';
 import { Label } from '../core/models/Label';
+import { CollaboratorComponent } from '../collaborator/collaborator.component';
 
 @Component({
   selector: 'app-updatenote',
@@ -12,11 +13,14 @@ export class UpdatenoteComponent implements OnInit {
 
   public removable = true;
 
+  public selectedReminder=new Date();
+
 
   constructor(public dialogRef: MatDialogRef<UpdatenoteComponent>,
     @Inject(MAT_DIALOG_DATA) public data,
     private noteService: NoteService,
-    private snackBar: MatSnackBar) { }
+    private snackBar: MatSnackBar,
+    private dialog: MatDialog) { }
 
   ngOnInit() {
   }
@@ -62,9 +66,40 @@ export class UpdatenoteComponent implements OnInit {
     });
   }
 
-  addLabelToNote(data){
+  public addLabelToNote(data){
     this.updateNote(data.note);
+  }
 
+  public updateReminder(note,reminder){
+    note.reminder=reminder;
+    this.updateNote(note); 
+    this.snackBar.open("Note Reminder Set", "OK", {
+      duration: 3000,
+    });
+  }
+
+  public removeReminder(note){
+    note.reminder=null;
+    this.updateNote(note); 
+    this.snackBar.open("Reminder Removed", "OK", {
+      duration: 3000,
+    });
+  }
+
+  public openCollaborator(note): void {
+    const dialogRef = this.dialog.open(CollaboratorComponent, {
+      width: '750px',
+      height: '400px',
+      data: note
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      this.updateNote(note); 
+      console.log("Dialog closed!");
+    });
+  }
+
+  public updateColor(data){
+    this.updateNote(data.note);
   }
 
   private updateNote(note) {
@@ -77,5 +112,4 @@ export class UpdatenoteComponent implements OnInit {
         });
       })
   }
-
 }
