@@ -74,8 +74,8 @@ export class SidebarComponent implements OnInit {
     this.router.navigate(['home/trashnote']);
   }
 
-  public fetchLabelNote(){
-    this.router.navigate(['home/labelspecificnote'])
+  public fetchLabelNote(label){
+    this.router.navigate(['home/labelspecificnote',label.labelName])
   }
 
   public openDialog(){

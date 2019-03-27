@@ -7,6 +7,10 @@
     <mat-icon class="searchicon">notifications_null</mat-icon>
     <div class="message">No notes in reminder</div>
   </div>
+  <div *ngIf="notes.length === 0 && message==='label'" class="empty">
+    <mat-icon class="searchicon">note</mat-icon>
+    <div class="message">No notes specific to this label</div>
+  </div>
   <div *ngIf="notes.length === 0 && message==='note'" class="empty">
     <mat-icon class="searchicon">note</mat-icon>
     <div class="message">Create new note</div>
@@ -27,10 +31,12 @@
         <mat-card-title (click)=openDialog(note)>{{note.title}}</mat-card-title>
         <button *ngIf="!note.pinned" mat-icon-button matTooltip="Pin" title="Pin" class="end"
           (click)="pinnedNote('pinned',note)">
-          <mat-icon>colorize</mat-icon>
+          <!-- <mat-icon>colorize</mat-icon> -->
+          <img src="/assets/images/pinn.jpg" alt="Pin" width="42" height="42">
         </button>
         <button *ngIf="note.pinned" mat-icon-button matTooltip="Pin" class="end" (click)="pinnedNote('unpinned',note)">
-          <mat-icon>colorize</mat-icon>
+          <!-- <mat-icon>colorize</mat-icon> -->
+          <img src="/assets/images/pinn.jpg" alt="Pin" width="42" height="42">
         </button>
       </mat-card-header>
       <mat-card-content (click)=openDialog(note) class="container-body">
@@ -91,12 +97,6 @@
               </app-add-label-to-note>
             </div>
           </mat-menu>
-          <button mat-icon-button matTooltip="undo">
-            <mat-icon>undo</mat-icon>
-          </button>
-          <button mat-icon-button matTooltip="redo">
-            <mat-icon>redo</mat-icon>
-          </button>
         </div>
       </mat-card-footer>
     </mat-card>

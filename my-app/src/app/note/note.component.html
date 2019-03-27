@@ -8,14 +8,14 @@
             <ng-container *ngIf="showHeader; else tempTtext">
               <mat-panel-title>
                 <h5>Take a note..</h5>
-                <div style="text-align:right; width:100%;">
+                <!-- <div style="text-align:right; width:100%;">
                   <button mat-icon-button matTooltip="new list">
                     <mat-icon>check_box</mat-icon>
                   </button>
                   <button mat-icon-button matTooltip="new note with image">
                     <mat-icon>image</mat-icon>
                   </button>
-                </div>
+                </div> -->
               </mat-panel-title>
             </ng-container>
             <ng-template #tempTtext #note>
@@ -46,9 +46,6 @@
                 </label>
                 <button mat-button (click)="updateReminder(createNoteForm.value.reminder,createNoteForm.value)">Save</button>
               </mat-menu>
-              <button mat-icon-button matTooltip="Collaborator" title="Collaborator">
-                <mat-icon>person_add</mat-icon>
-              </button>
               <app-color [particularNote]="createNoteForm.value" (colorEvent)="updateColor($event)"></app-color>
               <button mat-icon-button matTooltip="Add image" title="Add image">
                 <mat-icon>image</mat-icon>
@@ -65,12 +62,6 @@
                   </button>
                 </div>
               </mat-menu>
-              <button mat-icon-button matTooltip="undo">
-                <mat-icon>undo</mat-icon>
-              </button>
-              <button mat-icon-button matTooltip="redo">
-                <mat-icon>redo</mat-icon>
-              </button>
             </div>
           </mat-panel-description>
         </mat-expansion-panel>

@@ -26,7 +26,7 @@ const routes: Routes = [
       { path: 'note', component: ViewNotesComponent },
       { path: 'archivenote', component: ArchivenoteComponent },
       { path: 'trashnote', component: TrashnoteComponent },
-      { path: 'labelspecificnote', component: LabelspecificnoteComponent },
+      { path: 'labelspecificnote/:labelName', component: LabelspecificnoteComponent },
       { path: 'search', component: SearchComponent },
       { path: 'remainder', component: RemainderComponent }
     ]
