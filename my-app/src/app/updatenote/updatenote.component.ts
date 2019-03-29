@@ -3,6 +3,7 @@ import { MatDialogRef, MAT_DIALOG_DATA, MatSnackBar, MatDialog } from '@angular/
 import { NoteService } from '../core/service/note.service';
 import { Label } from '../core/models/Label';
 import { CollaboratorComponent } from '../collaborator/collaborator.component';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-updatenote',
@@ -15,12 +16,15 @@ export class UpdatenoteComponent implements OnInit {
 
   public selectedReminder=new Date();
 
+  selectedImage : File;
+
 
   constructor(public dialogRef: MatDialogRef<UpdatenoteComponent>,
     @Inject(MAT_DIALOG_DATA) public data,
     private noteService: NoteService,
     private snackBar: MatSnackBar,
-    private dialog: MatDialog) { }
+    private dialog: MatDialog,
+    private sanitizer: DomSanitizer) { }
 
   ngOnInit() {
   }
@@ -100,6 +104,45 @@ export class UpdatenoteComponent implements OnInit {
 
   public updateColor(data){
     this.updateNote(data.note);
+  }
+
+  public getImage(image, note): any {
+    const url = `data:${note.contentType};base64,${image.image}`;
+    return this.sanitizer.bypassSecurityTrustUrl(url);
+  }
+
+  public onImageEvent(event, note) {
+    this.selectedImage = event.target.files[0];
+    this.addImage(note);
+  }
+
+  public deleteImage(image){
+    this.noteService.deleteImage(image.imageId).subscribe((response)=>{
+      this.snackBar.open("Image deleted", "OK", {
+        duration: 3000,
+      });
+    },
+      (error) => {
+        console.log(error);
+        this.snackBar.open("Image could not be deleted", "ERROR", {
+          duration: 3000,
+        });
+      })
+  }
+
+  private addImage(note) {
+    this.noteService.addImages(this.selectedImage, note.noteId).subscribe((response) => {
+      this.updateNote(note); 
+      this.snackBar.open("Image added", "OK", {
+        duration: 3000,
+      });
+    },
+      (error) => {
+        console.log(error);
+        this.snackBar.open("Image could not be added", "ERROR", {
+          duration: 3000,
+        });
+      })
   }
 
   private updateNote(note) {

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttputilService } from './httputil.service';
 import { environment } from 'src/environments/environment';
-import { HttpHeaders } from '@angular/common/http';
+import { HttpHeaders, HttpRequest, HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -10,16 +10,19 @@ import { Observable } from 'rxjs';
 export class NoteService {
 
   token = localStorage.getItem('token');
-  public httpheaders () {
-    return {headers: new HttpHeaders({
-      'Content-Type': 'application/json',
-      'token': localStorage.getItem('token')
-    })}
+  public httpheaders() {
+    return {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'token': localStorage.getItem('token')
+      })
+    }
   };
 
 
   constructor(
-    private httpUtil: HttputilService
+    private httpUtil: HttputilService,
+    private http: HttpClient
   ) { }
 
   retrieveNote(): Observable<any> {
@@ -64,6 +67,21 @@ export class NoteService {
   }
 
   addLabelToNote(noteId, label) {
-    return this.httpUtil.putServiceOnlyHeader(environment.note_url + 'addlabeltonote/'+noteId,label)
+    return this.httpUtil.putServiceOnlyHeader(environment.note_url + 'addlabeltonote/' + noteId, label)
+  }
+
+  addImages(file, noteId) {
+    const formdata: FormData = new FormData();
+    formdata.append('file', file);
+    const request = new HttpRequest('POST', environment.note_url + 'addImage/' + noteId, formdata, {
+      reportProgress: true,
+      responseType: 'text'
+    }
+    );
+    return this.http.request(request);
+  }
+
+  deleteImage(imageId){
+    return this.httpUtil.deleteService(environment.note_url + 'deleteImage/'+imageId, this.httpheaders())
   }
 }

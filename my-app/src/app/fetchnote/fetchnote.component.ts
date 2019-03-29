@@ -1,9 +1,10 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { NoteService } from '../core/service/note.service';
-import { MatSnackBar, MatDialog} from '@angular/material';
+import { MatSnackBar, MatDialog } from '@angular/material';
 import { UpdatenoteComponent } from '../updatenote/updatenote.component';
 import { CollaboratorComponent } from '../collaborator/collaborator.component';
 import { FormControl } from '@angular/forms';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-fetchnote',
@@ -14,9 +15,11 @@ export class FetchnoteComponent implements OnInit {
 
   public removable = true;
 
-  min=new Date();
+  min = new Date();
 
-  selectedReminder =new Date();
+  selectedReminder = new Date();
+
+  selectedImage: File;
 
   @Input() message;
 
@@ -29,7 +32,8 @@ export class FetchnoteComponent implements OnInit {
   constructor(
     private noteService: NoteService,
     private snackBar: MatSnackBar,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private sanitizer: DomSanitizer
   ) { }
 
   ngOnInit() {
@@ -49,7 +53,6 @@ export class FetchnoteComponent implements OnInit {
   public openDialog(note): void {
     const dialogRef = this.dialog.open(UpdatenoteComponent, {
       width: '500px',
-      height: '200px',
       data: note
     });
     dialogRef.afterClosed().subscribe(result => {
@@ -110,21 +113,61 @@ export class FetchnoteComponent implements OnInit {
     });
   }
 
-  public updateColor(data){
+  public updateColor(data) {
     this.fetchEvent.emit(data);
   }
 
-  public updateReminder(note,reminder){
-    note.reminder=reminder;
-    const data = {note};
+  public updateReminder(note, reminder) {
+    note.reminder = reminder;
+    const data = { note };
     this.fetchEvent.emit(data);
   }
 
-  removeReminder(note){
-    note.reminder=null;
+  public removeReminder(note) {
+    note.reminder = null;
     console.log(note.reminder)
-    const data = {note};
+    const data = { note };
     this.fetchEvent.emit(data);
+  }
+
+  public getImage(image, note): any {
+    const url = `data:${note.contentType};base64,${image.image}`;
+    return this.sanitizer.bypassSecurityTrustUrl(url);
+  }
+
+  public onImageEvent(event, note) {
+    this.selectedImage = event.target.files[0];
+    this.addImage(note);
+  }
+
+  public deleteImage(image){
+    this.noteService.deleteImage(image.imageId).subscribe((response)=>{
+      this.snackBar.open("Image added", "OK", {
+        duration: 3000,
+      });
+    },
+      (error) => {
+        console.log(error);
+        this.snackBar.open("Image could not be added", "ERROR", {
+          duration: 3000,
+        });
+      })
+  }
+
+  private addImage(note) {
+    this.noteService.addImages(this.selectedImage, note.noteId).subscribe((response) => {
+      const data = {note};
+      this.fetchEvent.emit(data);
+      this.snackBar.open("Image added", "OK", {
+        duration: 3000,
+      });
+    },
+      (error) => {
+        console.log(error);
+        this.snackBar.open("Image could not be added", "ERROR", {
+          duration: 3000,
+        });
+      })
   }
 
 }

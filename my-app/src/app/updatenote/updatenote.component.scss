@@ -14,10 +14,29 @@
     padding: 0px;
     border-radius: 5px;
     box-sizing: border-box;
-    overflow: hidden;
+    // overflow: hidden;
     outline: 0;
     width: auto;
     height: auto;
     min-height: inherit;
     max-height: inherit;
+}
+
+.image{
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin: 7px -31px 18px 12px;
+    height: fit-content;
+    width: 101px;
+    display: inline-flex;
+  }
+
+.deleteIcon{
+    margin-left: -20px;
+    visibility: hidden;
+}
+
+.image:hover .deleteIcon{
+    opacity: 1;
+    visibility: visible;
 }

@@ -3,6 +3,21 @@
     margin-left: auto;
   }
 
+  .image{
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin: 2px -11px;
+    height: fit-content;
+    width: 101px;
+  }
+
+  .addImage{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin: 4px 16px 14px 0px;
+  }
+
   :host {
     .gk {
     &-container {
@@ -91,4 +106,9 @@
   align-items: center;
   flex-direction: column;
   padding: 129px;
+}
+.pin
+{
+   width: 35px;
+          height: 30px;
 }

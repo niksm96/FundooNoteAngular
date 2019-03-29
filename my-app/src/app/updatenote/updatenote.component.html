@@ -1,5 +1,9 @@
 <div [style.background-color]="data.color">
   <div class="head">
+    <div *ngFor="let image of data.images" class="image">
+      <img [src]=getImage(image,data) width="70%" height="70%">
+      <mat-icon class="deleteIcon" (click)="deleteImage(image)">delete</mat-icon>
+    </div>
     <input matInput [(ngModel)]="data.title" [value]=data.title placeholder="Title">
     <button *ngIf="!data.pinned" mat-icon-button matTooltip="Pin" title="Pin" class="button" (click)="pinnedNote(data)">
       <mat-icon>colorize</mat-icon>
@@ -46,7 +50,8 @@
     </button>
     <app-color [particularNote]="data" (colorEvent)="updateColor($event)"></app-color>
     <button mat-icon-button matTooltip="Add image">
-      <mat-icon>image</mat-icon>
+      <input style="display: none" type="file" (change)="onImageEvent($event,data)" #addImage>
+      <mat-icon (click)="addImage.click()">image</mat-icon>
     </button>
     <button *ngIf="!data.archive" mat-icon-button matTooltip="Archive" (click)="updateArchiveNote(data)">
       <mat-icon>archive</mat-icon>
